@@ -32,19 +32,18 @@
     <div class="cards">
       <div class="card">
   
-  <h3 style="font-family: 'Playfair Display', serif; text-align: center;">Agente de  Reservas</h3>
-  <p style="text-align: left; margin-top:8px;">Ideal para negocios que gestionan reservas o citas:</p>
-  
+  <h3 style="font-family: 'Playfair Display', serif; text-align: center; transform: translateX(-10px);">Agente de  Reservas</h3><br>
+
+  <p style="text-align: left; margin-top:8px;">Ideal para negocios que gestionan reservas o citas.</p>
+  <span class="precio-instalacion">149 €</span>
+
 
     <ul class="benefits-list" style="text-align:left; margin:0; padding-left:18px; list-style: none;">
       <li style="margin:6px 0;">✅ Ahorra tiempo</li>
       <li style="margin:6px 0;">✅ Evita errores</li>
       <li style="margin:6px 0;">✅ Mejora la atención al cliente</li>
     </ul>
-    <ul class="price-details" style="text-align:left; margin:8px 0 0 18px; padding:0; list-style: disc;">
-      <li style="margin:6px 0;">Precio de instalación: <strong>149&nbsp;€</strong></li>
-    </ul>
-   
+    
     <!-- Línea divisoria y precio final -->
     <hr class="price-divider" />
     <p class="final-price" style="text-align:center; margin-top:12px; font-family: 'Playfair Display';">
@@ -68,6 +67,15 @@
   <p style="margin:0;">© 2025 OrderFlow. Todos los derechos reservados.</p>
 </footer>
 <style>
+  .precio-instalacion {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #00aaff; /* azul */
+    font-weight: bold;
+    font-size: 18px;
+}
+
   .menu-icon {
     display: none;
     flex-direction: column;
@@ -123,9 +131,9 @@
   .final-price { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #fff; margin: 0; }
   .final-price .final-amount { font-weight: 700; white-space: nowrap; }
   .final-price .per-month { font-size: 0.85em; margin-left:6px; color: rgba(255,255,255,0.85); }
-  /* Precio dentro del cuadro, arriba izquierda */
+  /* Precio dentro del cuadro, arriba derecha */
   .card { position: relative; }
-  /* .card-price-top removed (price moved/hidden) */
+  /* card-price-badge removed - price moved below */
 </style>
 </body>
 </html>
