@@ -36,7 +36,13 @@
       <label>Nombre *</label>
        <input id="nombre" name="nombre" placeholder="" required>
       <label>Tipo de negocio *</label>
-       <input id="negocio" name="negocio" placeholder="" required>
+       <select id="negocio" name="negocio" required style="width:100%; padding:10px; margin-bottom:10px; border-radius:5px; border:1px solid #ccc;" placeholder="Selecciona una opción" required>
+        <option value="" disabled selected>Selecciona una opción</option>
+        <option value="peluqueria">Peluquería</option>
+        <option value="clinica">Clínica</option>
+        <option value="restaurante">Restaurante</option>
+        <option value="otros">Otro</option>
+        </select>
       <label>Email *</label>
        <input id="email" name="email" type="email" placeholder="" required>
 
@@ -107,13 +113,17 @@
   .form-status.success { background: #0b6623; color: #fff; }
   .form-status.error { background: #6b0b0b; color: #fff; }
 </style>
+
 <script>
 document.getElementById("contact-form").addEventListener("submit", async function(e) {
   e.preventDefault();
 
   const form = e.target;
   const submitBtn = form.querySelector('button[type="submit"]');
-  const statusEl = document.getElementById('form-status');
+
+  const originalText = submitBtn.textContent; // Guardar texto original
+  const originalBg = submitBtn.style.backgroundColor || '#007BFF'; // Guardar color original
+  const originalColor = submitBtn.style.color || '#fff';
 
   const data = {
     nombre: document.getElementById("nombre").value,
@@ -121,11 +131,11 @@ document.getElementById("contact-form").addEventListener("submit", async functio
     email: document.getElementById("email").value,
   };
 
-  // Mostrar estado de envío (disable botón)
+  // Estado de envío
   submitBtn.disabled = true;
-  statusEl.style.display = 'block';
-  statusEl.className = 'form-status';
-  statusEl.textContent = 'Enviando...';
+  submitBtn.textContent = 'Enviando...';
+  submitBtn.style.backgroundColor = '#6c757d'; // gris para "procesando"
+  submitBtn.style.color = '#fff';
 
   try {
     const response = await fetch("http://localhost:5678/webhook/contacto-orderflow", {
@@ -135,34 +145,37 @@ document.getElementById("contact-form").addEventListener("submit", async functio
       body: JSON.stringify(data)
     });
 
-    // Intentar parsear JSON; si falla, tratar como error
     let result = {};
     try { result = await response.json(); } catch (e) { /* ignore */ }
 
     if (response.ok && (result.success === undefined || result.success)) {
-      statusEl.classList.add('success');
-      statusEl.textContent = 'Formulario enviado correctamente!';
+      submitBtn.textContent = '¡Enviado!';
+      submitBtn.style.backgroundColor = '#28a745'; // verde
+      submitBtn.style.color = '#fff';
       form.reset();
     } else {
-      statusEl.classList.add('error');
-      statusEl.textContent = 'No se pudo enviar el formulario. Por favor inténtalo de nuevo o escríbenos a orderflow.team@gmail.com';
+      submitBtn.textContent = 'Error. Intenta de nuevo';
+      submitBtn.style.backgroundColor = '#dc3545'; // rojo
+      submitBtn.style.color = '#fff';
       console.error('Respuesta no OK:', response.status, result);
     }
 
   } catch (error) {
     console.error("Error al enviar:", error);
-    statusEl.classList.add('error');
-    statusEl.textContent = 'Hubo un error al enviar el formulario. Por favor contáctanos en orderflow.team@gmail.com';
+    submitBtn.textContent = 'Error. Intenta de nuevo';
+    submitBtn.style.backgroundColor = '#dc3545'; // rojo
+    submitBtn.style.color = '#fff';
   } finally {
-    // Rehabilitar botón y ocultar el mensaje después de 6 segundos
-    submitBtn.disabled = false;
+    // Volver al estado original después de 3 segundos
     setTimeout(() => {
-      statusEl.style.display = 'none';
-      statusEl.className = 'form-status';
-      statusEl.textContent = '';
-    }, 6000);
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+      submitBtn.style.backgroundColor = originalBg;
+      submitBtn.style.color = originalColor;
+    }, 3000);
   }
 });
 </script>
+
 </body>
 </html>
