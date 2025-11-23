@@ -32,7 +32,7 @@
       right: 20px;
       width: 350px;
       height: 520px;
-      background: rgba(0, 0, 0, 1);
+      background: rgba(90, 90, 90, 1);
       border-radius: 16px;
       border: 1px solid #ddd;
       box-shadow: 0 5px 35px #ffffffff;
@@ -110,11 +110,56 @@
   `;
   document.head.appendChild(style);
 
-  // Burbuja flotante
-  const bubble = document.createElement("div");
-  bubble.id = "chatBubble";
-  bubble.innerHTML = "💬";
-  document.body.appendChild(bubble);
+// Burbuja flotante animada
+const bubble = document.createElement("div");
+bubble.id = "chatBubble";
+bubble.innerHTML = ""; // dejamos vacío para usar CSS
+
+document.body.appendChild(bubble);
+
+// Añadimos animación de burbuja
+const styleBubble = document.createElement("style");
+styleBubble.innerHTML += `
+  #chatBubble {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: #000;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    animation: bounce 1.5s infinite;
+    z-index: 9999;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  #chatBubble::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    bottom: -10px;
+    left: 20px;
+    opacity: 0.6;
+    animation: bubblePop 2s infinite;
+  }
+
+  @keyframes bubblePop {
+    0% { transform: translateY(0) scale(1); opacity: 0.6; }
+    50% { transform: translateY(-15px) scale(1.3); opacity: 0.3; }
+    100% { transform: translateY(0) scale(1); opacity: 0.6; }
+  }
+`;
+document.head.appendChild(styleBubble);
+
 
   // Ventana del chat
   const widget = document.createElement("div");
