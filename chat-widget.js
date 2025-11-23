@@ -4,6 +4,61 @@
   // Estilos principales
   const style = document.createElement("style");
   style.innerHTML = `
+  /* Soluciona texto invertido */
+#chatMessages, #chatText {
+  direction: ltr !important;
+  unicode-bidi: plaintext !important;
+}
+
+/* Input + botón */
+#chatInput {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  border-top: 1px solid #eee;
+  background: #111;
+}
+
+#chatText {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #222;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* Botón */
+#chatSend {
+  padding: 10px 14px;
+  background: #000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* 🔥 MÓVIL — que el input sea MUCHO más grande */
+@media (max-width: 480px) {
+  #chatInput {
+    padding: 8px;
+  }
+
+  #chatText {
+    font-size: 18px;
+    padding: 14px;
+    flex: 3; /* 🔥 El input ocupa 3 veces más que el botón */
+  }
+
+  #chatSend {
+    flex: 1;
+    font-size: 16px;
+    padding: 14px;
+  }
+}
+
     /* Burbuja flotante negra con animación de chat */
     #chatBubble {
       position: fixed;
@@ -152,6 +207,7 @@
   // Burbuja flotante
   const bubble = document.createElement("div");
   bubble.id = "chatBubble";
+  bubble.innerHTML = "🗨️";
   document.body.appendChild(bubble);
 
   // Widget de chat
