@@ -1,60 +1,71 @@
 (function () {
-  const LOGO_URL = "faviconorderflow.png"; // <-- CAMBIA TU LOGO AQUÍ
+  const LOGO_URL = "/faviconorderflow.png"; // usa tu favicon o cambia por otra URL
 
-  // Insertamos estilos
+  // Estilos principales
   const style = document.createElement("style");
   style.innerHTML = `
+    /* Burbuja flotante azul marino con animación */
     #chatBubble {
       position: fixed;
       bottom: 20px;
       right: 20px;
       width: 60px;
       height: 60px;
-      background: black;
+      background: #001f4d; /* azul marino */
       border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-size: 30px;
       cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-      transition: 0.3s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      animation: bounce 1.5s infinite;
       z-index: 9999;
     }
-    #chatBubble:hover {
-      transform: scale(1.1);
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    #chatBubble::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      bottom: -10px;
+      left: 20px;
+      opacity: 0.6;
+      animation: bubblePop 2s infinite;
+    }
+    @keyframes bubblePop {
+      0% { transform: translateY(0) scale(1); opacity: 0.6; }
+      50% { transform: translateY(-15px) scale(1.3); opacity: 0.3; }
+      100% { transform: translateY(0) scale(1); opacity: 0.6; }
     }
 
+    /* Widget de chat */
     #chatWidget {
       position: fixed;
       bottom: 100px;
       right: 20px;
       width: 350px;
+      max-width: 90%;
       height: 520px;
-      background: rgba(90, 90, 90, 1);
+      background: #000; /* área de mensajes negra */
       border-radius: 16px;
       border: 1px solid #ddd;
-      box-shadow: 0 5px 35px #ffffffff;
+      box-shadow: 0 5px 35px rgba(0, 0, 0, 0.2);
       display: none;
       flex-direction: column;
       overflow: hidden;
-      animation: slideUp 0.35s ease forwards;
-      z-index: 9999;
       font-family: system-ui, sans-serif;
+      z-index: 9999;
     }
 
-    @keyframes slideUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
+    /* Cabecera blanca */
     #chatHeader {
       display: flex;
       align-items: center;
       gap: 10px;
-      background: black;
-      color: white;
+      background: #fff;
+      color: black;
       padding: 14px;
       font-size: 16px;
     }
@@ -64,11 +75,12 @@
       border-radius: 6px;
     }
 
+    /* Área de mensajes */
     #chatMessages {
       flex: 1;
       padding: 12px;
       overflow-y: auto;
-      background: #fafafa;
+      color: white;
     }
     .msg {
       margin-bottom: 12px;
@@ -79,89 +91,68 @@
     }
     .userMsg {
       background: #d9f7ff;
+      color: #000;
       align-self: flex-end;
     }
     .botMsg {
-      background: #ececec;
+      background: #222;
+      color: #fff;
       align-self: flex-start;
     }
 
+    /* Campo de texto + botón */
     #chatInput {
       display: flex;
       gap: 8px;
       padding: 10px;
       border-top: 1px solid #eee;
-      background: white;
+      background: #111;
     }
     #chatText {
       flex: 1;
-      padding: 8px;
+      padding: 10px;
       border-radius: 8px;
-      border: 1px solid #ddd;
+      border: 1px solid #444;
+      background: #222;
+      color: #fff;
+      font-size: 14px;
+    }
+    #chatText::placeholder {
+      color: #bbb;
     }
     #chatSend {
       padding: 8px 14px;
-      background: black;
+      background: #001f4d; /* azul marino */
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      font-size: 14px;
+    }
+
+    /* Responsivo móvil */
+    @media (max-width: 480px) {
+      #chatWidget {
+        width: 95%;
+        height: 450px;
+        bottom: 80px;
+      }
+      #chatText {
+        font-size: 16px;
+      }
+      #chatSend {
+        font-size: 16px;
+      }
     }
   `;
   document.head.appendChild(style);
 
-// Burbuja flotante animada
-const bubble = document.createElement("div");
-bubble.id = "chatBubble";
-bubble.innerHTML = ""; // dejamos vacío para usar CSS
+  // Burbuja flotante
+  const bubble = document.createElement("div");
+  bubble.id = "chatBubble";
+  document.body.appendChild(bubble);
 
-document.body.appendChild(bubble);
-
-// Añadimos animación de burbuja
-const styleBubble = document.createElement("style");
-styleBubble.innerHTML += `
-  #chatBubble {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background: #000;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    animation: bounce 1.5s infinite;
-    z-index: 9999;
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  #chatBubble::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    border-radius: 50%;
-    bottom: -10px;
-    left: 20px;
-    opacity: 0.6;
-    animation: bubblePop 2s infinite;
-  }
-
-  @keyframes bubblePop {
-    0% { transform: translateY(0) scale(1); opacity: 0.6; }
-    50% { transform: translateY(-15px) scale(1.3); opacity: 0.3; }
-    100% { transform: translateY(0) scale(1); opacity: 0.6; }
-  }
-`;
-document.head.appendChild(styleBubble);
-
-
-  // Ventana del chat
+  // Widget de chat
   const widget = document.createElement("div");
   widget.id = "chatWidget";
   widget.innerHTML = `
@@ -169,9 +160,7 @@ document.head.appendChild(styleBubble);
       <img src="${LOGO_URL}" />
       <b>Asistente IA</b>
     </div>
-
     <div id="chatMessages"></div>
-
     <div id="chatInput">
       <input id="chatText" placeholder="Escribe aquí..." />
       <button id="chatSend">Enviar</button>
@@ -179,11 +168,10 @@ document.head.appendChild(styleBubble);
   `;
   document.body.appendChild(widget);
 
-  // Abrir / cerrar
+  // Abrir / cerrar widget
   bubble.onclick = () => {
     widget.style.display = widget.style.display === "flex" ? "none" : "flex";
 
-    // Mensaje inicial automático
     if (!window.initialMessageSent) {
       const msgBox = document.getElementById("chatMessages");
       msgBox.innerHTML += `<div class="msg botMsg">¡Hola! 👋 ¿En qué puedo ayudarte?</div>`;
@@ -191,7 +179,7 @@ document.head.appendChild(styleBubble);
     }
   };
 
-  // Enviar mensajes
+  // Enviar mensaje
   async function sendMessage() {
     const text = document.getElementById("chatText").value.trim();
     if (!text) return;
