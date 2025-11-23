@@ -1,43 +1,45 @@
 (function () {
-  const LOGO_URL = "/faviconorderflow.png"; // usa tu favicon o cambia por otra URL
+  const LOGO_URL = "https://orderflowteam.github.io/OrderFlow/favicon_orderflow_logo_blanco-removebg-preview.png";
 
   // Estilos principales
   const style = document.createElement("style");
   style.innerHTML = `
-    /* Burbuja flotante azul marino con animación */
+    /* Burbuja flotante negra con animación de chat */
     #chatBubble {
       position: fixed;
       bottom: 20px;
       right: 20px;
       width: 60px;
       height: 60px;
-      background: #001f4d; /* azul marino */
+      background: #000;
       border-radius: 50%;
       cursor: pointer;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       animation: bounce 1.5s infinite;
       z-index: 9999;
     }
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-8px); }
     }
     #chatBubble::after {
       content: '';
       position: absolute;
-      width: 20px;
-      height: 20px;
-      background: #fff;
+      width: 18px;
+      height: 18px;
+      background: #001f4d;
       border-radius: 50%;
-      bottom: -10px;
-      left: 20px;
-      opacity: 0.6;
-      animation: bubblePop 2s infinite;
+      bottom: 5px;
+      right: 5px;
+      box-shadow: 0 0 5px #fff;
+      animation: pop 1.5s infinite;
     }
-    @keyframes bubblePop {
-      0% { transform: translateY(0) scale(1); opacity: 0.6; }
-      50% { transform: translateY(-15px) scale(1.3); opacity: 0.3; }
-      100% { transform: translateY(0) scale(1); opacity: 0.6; }
+    @keyframes pop {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.5; }
     }
 
     /* Widget de chat */
@@ -48,7 +50,7 @@
       width: 350px;
       max-width: 90%;
       height: 520px;
-      background: #000; /* área de mensajes negra */
+      background: #fff; /* fondo de mensajes blanco */
       border-radius: 16px;
       border: 1px solid #ddd;
       box-shadow: 0 5px 35px rgba(0, 0, 0, 0.2);
@@ -59,13 +61,13 @@
       z-index: 9999;
     }
 
-    /* Cabecera blanca */
+    /* Cabecera negra */
     #chatHeader {
       display: flex;
       align-items: center;
       gap: 10px;
-      background: #fff;
-      color: black;
+      background: #000;
+      color: white;
       padding: 14px;
       font-size: 16px;
     }
@@ -80,7 +82,8 @@
       flex: 1;
       padding: 12px;
       overflow-y: auto;
-      color: white;
+      color: #333; /* gris para mensajes */
+      background: #fff;
     }
     .msg {
       margin-bottom: 12px;
@@ -90,13 +93,13 @@
       line-height: 1.4;
     }
     .userMsg {
-      background: #d9f7ff;
+      background: #ddd; /* gris más claro */
       color: #000;
       align-self: flex-end;
     }
     .botMsg {
-      background: #222;
-      color: #fff;
+      background: #f0f0f0; /* gris para bot */
+      color: #000;
       align-self: flex-start;
     }
 
@@ -105,29 +108,28 @@
       display: flex;
       gap: 8px;
       padding: 10px;
-      border-top: 1px solid #eee;
-      background: #111;
+      border-top: 1px solid #ccc;
+      background: #fff;
     }
     #chatText {
       flex: 1;
-      padding: 10px;
+      padding: 12px;
       border-radius: 8px;
-      border: 1px solid #444;
-      background: #222;
-      color: #fff;
+      border: 1px solid #ccc;
+      background: #f9f9f9;
+      color: #000;
       font-size: 14px;
     }
-    #chatText::placeholder {
-      color: #bbb;
-    }
+    #chatText::placeholder { color: #aaa; }
     #chatSend {
-      padding: 8px 14px;
-      background: #001f4d; /* azul marino */
+      padding: 12px;
+      background: #000; /* negro */
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       font-size: 14px;
+      flex-shrink: 0;
     }
 
     /* Responsivo móvil */
@@ -168,22 +170,18 @@
   `;
   document.body.appendChild(widget);
 
-  // Abrir / cerrar widget
   bubble.onclick = () => {
     widget.style.display = widget.style.display === "flex" ? "none" : "flex";
-
     if (!window.initialMessageSent) {
-      const msgBox = document.getElementById("chatMessages");
-      msgBox.innerHTML += `<div class="msg botMsg">¡Hola! 👋 ¿En qué puedo ayudarte?</div>`;
+      document.getElementById("chatMessages").innerHTML += 
+        `<div class="msg botMsg">¡Hola! 👋 ¿En qué puedo ayudarte?</div>`;
       window.initialMessageSent = true;
     }
   };
 
-  // Enviar mensaje
   async function sendMessage() {
     const text = document.getElementById("chatText").value.trim();
     if (!text) return;
-
     const msgBox = document.getElementById("chatMessages");
     msgBox.innerHTML += `<div class="msg userMsg">${text}</div>`;
     document.getElementById("chatText").value = "";
@@ -194,7 +192,6 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: text })
     });
-
     const data = await res.json();
     msgBox.innerHTML += `<div class="msg botMsg">${data.reply}</div>`;
     msgBox.scrollTop = msgBox.scrollHeight;
