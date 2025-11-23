@@ -207,7 +207,7 @@
   // Burbuja flotante
   const bubble = document.createElement("div");
   bubble.id = "chatBubble";
-  bubble.innerHTML = "🗨️";
+  bubble.innerHTML = "?";
   document.body.appendChild(bubble);
 
   // Widget de chat
