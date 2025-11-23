@@ -32,10 +32,10 @@
       right: 20px;
       width: 350px;
       height: 520px;
-      background: #fff;
+      background: rgba(0, 0, 0, 1);
       border-radius: 16px;
       border: 1px solid #ddd;
-      box-shadow: 0 5px 35px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 5px 35px #ffffffff;
       display: none;
       flex-direction: column;
       overflow: hidden;
