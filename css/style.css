@@ -90,7 +90,7 @@ section.content, main, .cards, .card, .benefits-list, .benefits-ul, .benefits-im
 	color: #fff;
 }
 .cards { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; margin-top:30px; }
-.card { background:#313131; color:#fff; padding:24px; border-radius:12px; flex:1 1 250px; box-shadow:0 2px 8px rgba(0,0,0,0.12); text-align:center; margin:12px; }
+.card { background:#313131; color:#fff; padding:24px; border-radius:12px; flex:1 1 300px; max-width: 400px; box-shadow:0 2px 8px rgba(0,0,0,0.12); text-align:center; margin:12px; }
 .hero { text-align:center; padding:80px 20px; }
 .hero h1 { font-size:2.5rem; margin-bottom:15px; color:#0078d4; }
 .hero p { font-size:1.2rem; margin-bottom:10px; }
