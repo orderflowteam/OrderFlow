@@ -1,113 +1,258 @@
-
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OrderFlow - Servicios</title>
   <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Open+Sans:wght@400;600;700&display=swap"
+    rel="stylesheet">
   <link rel="icon" type="image/png" href="faviconorderflow.png">
 </head>
+
 <body>
-<header>
-  <div class="logo" style="font-family: 'Playfair Display', serif;">OrderFlow</div>
-  <input type="checkbox" id="menu-toggle" style="display:none;">
-  <label for="menu-toggle" class="menu-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </label>
-  <nav>
-  <a href="index.html" style="font-family: 'Playfair Display', serif;">Inicio</a>
-  <a href="sobre-nosotros.html" style="font-family: 'Playfair Display', serif;">Sobre Nosotros</a>
-  <a href="servicios.html" class="active" style="font-family: 'Playfair Display', serif;">Servicios</a>
-  <a href="contacto.html" style="font-family: 'Playfair Display', serif;">Contacto</a>
-  </nav>
-</header>
+  <header>
+    <div class="logo" style="font-family: 'Playfair Display', serif;">OrderFlow</div>
+    <input type="checkbox" id="menu-toggle" style="display:none;">
+    <label for="menu-toggle" class="menu-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+    <nav>
+      <a href="index.html" style="font-family: 'Playfair Display', serif;">Inicio</a>
+      <a href="sobre-nosotros.html" style="font-family: 'Playfair Display', serif;">Sobre Nosotros</a>
+      <a href="servicios.html" class="active" style="font-family: 'Playfair Display', serif;">Servicios</a>
+      <a href="analisis-negocio.html" style="font-family: 'Playfair Display', serif;">Análisis del negocio</a>
+      <a href="contacto.html" style="font-family: 'Playfair Display', serif;">Contacto</a>
+    </nav>
+  </header>
 
-<main>
-  <section class="content">
-  <h1 style="text-align: center; font-family: 'Playfair Display', serif; margin-bottom:32px;">Servicios</h1>
-    <p style="max-width:600px; margin:20px auto; padding:0 5%; line-height:1.6;"><!-- Editable --> Estos son los servicios que ofrecemos en OrderFlow para ayudarte a automatizar tareas, optimizar procesos y ahorrar tiempo.</p>
-    <div class="cards">
-    <div class="card">
-  <h3 style="font-family: Roboto ;18px; text-align:center; color: #0066FF; background-color: rgba(62, 161, 255, 0.15); border-radius: 4px; padding: 12px;">AUTOMATIZACIÓN
-DE PROCESOS</h3><br>
-  <p style="margin-bottom:18px; text-align:left;">Analizamos tus procesos internos y los automatizamos para optimizar el rendimiento del negocio.</p>
-  <p style="margin-bottom:18px; text-align:left;">Desarrollamos soluciones a medida, adaptadas a la forma de trabajar de cada empresa, independientemente del sector.</p>
-  </ol>
-      </div>
-      <div class="card">
-  <h3 style="font-family: Roboto ;18px; text-align:center; color: #0066FF; background-color: rgba(62, 161, 255, 0.15); border-radius: 4px; padding: 12px;">DESARROLLO DE AGENTES</h3><br>
-        <p style="margin-bottom:18px; text-align:left;">Desarrollamos agentes para ejecutar funciones de forma autónoma y optimizar la operativa del negocio.</p>
-        <p style="margin-bottom:18px; text-align:left;">Los agentes se diseñan a medida para cumplir los objetivos de cada negocio y pueden trabajar de manera autónoma o integrarse en los procesos existentes, adaptándose a cualquier tipo de empresa.</p>
-      </div>
-      
-    </div>
-  </section>
-</main>
+  <main>
+    <section class="content" style="padding: 60px 20px;">
+      <h1 class="page-title">Servicios</h1>
+      <p class="page-description">
+        <!-- Editable --> Estos son los servicios que ofrecemos en OrderFlow para ayudarte a automatizar tareas,
+        optimizar procesos y ahorrar tiempo.
+      </p>
 
-<footer style="background:#000; color:white; text-align:center; padding:20px; margin-top:0; position:static; left:0; bottom:0; width:100%;">
-  <p style="margin:0;">© 2025 OrderFlow. Todos los derechos reservados.</p>
-</footer>
-<style>
-  .menu-icon {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    width: 32px;
-    height: 32px;
-    justify-content: center;
-    align-items: center;
-    margin-left: 20px;
-    z-index: 101;
-  }
-  .menu-icon span {
-    height: 4px;
-    width: 28px;
-    background: white;
-    margin: 4px 0;
-    border-radius: 2px;
-    display: block;
-    transition: 0.3s;
-  }
-  @media (max-width: 600px) {
-    nav {
-      position: absolute;
-      top: 60px;
-      left: 0;
-      width: 100vw;
-      background: #000;
+      <div class="cards-container">
+
+        <!-- Service Card 1 -->
+        <div class="service-card">
+          <div class="card-icon">⚡</div>
+          <h3 class="card-title">AUTOMATIZACIÓN DE PROCESOS</h3>
+          <p class="card-text">Analizamos tus procesos internos y los automatizamos para optimizar el rendimiento del
+            negocio.</p>
+          <p class="card-text">Desarrollamos soluciones a medida, adaptadas a la forma de trabajar de cada empresa,
+            independientemente del sector.</p>
+        </div>
+
+        <!-- Service Card 2 -->
+        <div class="service-card">
+          <div class="card-icon">🤖</div>
+          <h3 class="card-title">DESARROLLO DE AGENTES</h3>
+          <p class="card-text">Desarrollamos agentes para ejecutar funciones de forma autónoma y optimizar la operativa
+            del negocio.</p>
+          <p class="card-text">Los agentes se diseñan a medida para cumplir los objetivos de cada negocio y pueden
+            trabajar de manera autónoma o integrarse en los procesos existentes, adaptándose a cualquier tipo de
+            empresa.</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer
+    style="background:#000; color:white; text-align:center; padding:20px; margin-top:0; position:static; left:0; bottom:0; width:100%;">
+    <p style="margin:0;">© 2025 OrderFlow. Todos los derechos reservados.</p>
+  </footer>
+  <style>
+    /* Page Typography */
+    .page-title {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+      color: #fff;
+    }
+
+    .page-description {
+      max-width: 700px;
+      margin: 0 auto 60px auto;
+      text-align: center;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      color: #ddd;
+    }
+
+    /* Cards Layout */
+    .cards-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Premium Service Card */
+    .service-card {
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 30px;
+      flex: 1 1 400px;
+      /* Grow, shrink, basis */
+      max-width: 500px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      display: flex;
       flex-direction: column;
       align-items: flex-start;
-      padding: 20px 0 10px 30px;
-      display: none;
-      z-index: 100;
+      position: relative;
+      overflow: hidden;
     }
-    header {
-      flex-direction: row;
-      padding: 15px 20px;
-    }
-    .menu-icon {
-      display: flex;
-    }
-    #menu-toggle:checked + .menu-icon + nav {
-      display: flex;
-    }
-    nav a {
-      margin: 10px 0;
-      padding: 10px 0;
-      width: 100%;
-      border-radius: 0;
-    }
-  }
-</style>
-<script>
-  window.CHATBOT_ENDPOINT = "http://localhost:5678/webhook-test/bf6397e7-fac0-471c-9572-7666849750b2";
-</script>
 
-<script src="https://orderflowteam.github.io/OrderFlow/chat-widget.js"></script>
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #47a2e8, #00569a);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      border-color: #555;
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Card Internal Elements */
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      background: rgba(71, 162, 232, 0.15);
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .card-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 2px;
+      background-color: #47a2e8;
+    }
+
+    .card-text {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1rem;
+      color: #ccc;
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+
+    /* Mobile Nav Styles (Existing) */
+    .menu-icon {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      justify-content: center;
+      align-items: center;
+      margin-left: 20px;
+      z-index: 101;
+    }
+
+    .menu-icon span {
+      height: 4px;
+      width: 28px;
+      background: white;
+      margin: 4px 0;
+      border-radius: 2px;
+      display: block;
+      transition: 0.3s;
+    }
+
+    @media (max-width: 800px) {
+      .cards-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .service-card {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100vw;
+        background: #000;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 0 10px 30px;
+        display: none;
+        z-index: 100;
+      }
+
+      header {
+        flex-direction: row;
+        padding: 15px 20px;
+      }
+
+      .menu-icon {
+        display: flex;
+      }
+
+      #menu-toggle:checked+.menu-icon+nav {
+        display: flex;
+      }
+
+      nav a {
+        margin: 10px 0;
+        padding: 10px 0;
+        width: 100%;
+        border-radius: 0;
+      }
+    }
+  </style>
+  <script>
+    window.CHATBOT_ENDPOINT = "http://localhost:5678/webhook-test/bf6397e7-fac0-471c-9572-7666849750b2";
+  </script>
+
+  <script src="https://orderflowteam.github.io/OrderFlow/chat-widget.js"></script>
 
 </body>
+
 </html>
