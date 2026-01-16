@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OrderFlow - Análisis del negocio</title>
+    <title>OrderFlow - Diagnóstico</title>
     <link rel="stylesheet" href="css/style.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Open+Sans:wght@400;600;700&display=swap"
@@ -25,15 +25,15 @@
             <a href="index.html" style="font-family: 'Playfair Display', serif;">Inicio</a>
             <a href="sobre-nosotros.html" style="font-family: 'Playfair Display', serif;">Sobre Nosotros</a>
             <a href="servicios.html" style="font-family: 'Playfair Display', serif;">Servicios</a>
-            <a href="analisis-negocio.html" class="active" style="font-family: 'Playfair Display', serif;">Análisis del
-                negocio</a>
+            <a href="analisis-negocio.html" class="active"
+                style="font-family: 'Playfair Display', serif;">Diagnóstico</a>
             <a href="contacto.html" style="font-family: 'Playfair Display', serif;">Contacto</a>
         </nav>
     </header>
 
     <main>
         <section class="hero" style="text-align:center; padding: 60px 20px;">
-            <h1 style="font-family: 'Playfair Display', serif; margin-bottom: 20px; color: #fff;">Análisis del negocio
+            <h1 style="font-family: 'Playfair Display', serif; margin-bottom: 20px; color: #fff;">Análisis del Negocio
             </h1>
             <p style="max-width: 700px; margin: 0 auto; line-height: 1.6; font-size: 1.2rem;">
                 Agenda una llamada breve para entender cómo funciona tu negocio por dentro.
@@ -52,7 +52,7 @@
                     llamada?</h2>
                 <ul style="list-style: none; padding: 0;">
                     <li style="margin-bottom: 15px; display: flex; align-items: start;">
-                        <span style="color: #47a2e8; margin-right: 10px;">✓</span> Entender cómo gestionas hoy tu
+                        <span style="color: #47a2e8; margin-right: 10px;">✓</span> Entender cómo gestionas tu
                         negocio
                     </li>
                     <li style="margin-bottom: 15px; display: flex; align-items: start;">
@@ -71,18 +71,36 @@
                 <div
                     style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px;">
                     <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 1.5rem;">⏱️</span> Duración: <strong>15–20 minutos</strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg> Duración: <strong>15–20 minutos</strong>
                     </div>
                     <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 1.5rem;">📞</span> Formato: <strong>llamada</strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                            </path>
+                        </svg> Formato: <strong>llamada</strong>
                     </div>
                 </div>
             </div>
 
             <div
                 style="background: #313131; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 60px;">
-                <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 25px; text-align: center;">📅 Agenda
-                    tu llamada de análisis</h2>
+                <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 25px; text-align: center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        style="vertical-align:bottom; margin-right:8px;">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    Agenda tu llamada de diagnóstico
+                </h2>
                 <form action="#" method="POST"> <!-- Placeholder action -->
                     <label for="nombre" style="display: block; font-weight: 600;">Nombre y apellidos *</label>
                     <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
@@ -107,7 +125,17 @@
                         <!-- Date Dropdown -->
                         <div style="flex: 1; position: relative;">
                             <label style="display: block; font-weight: 600; margin-bottom: 5px;">Fecha *</label>
-                            <button type="button" id="dateTrigger" class="picker-trigger">Selecciona fecha 📅</button>
+                            <button type="button" id="dateTrigger" class="picker-trigger">
+                                <span>Selecciona fecha</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </button>
 
                             <div id="calendarDropdown" class="datum-dropdown">
                                 <div class="calendar-header compact">
@@ -126,7 +154,15 @@
                         <!-- Time Dropdown -->
                         <div style="flex: 1; position: relative;">
                             <label style="display: block; font-weight: 600; margin-bottom: 5px;">Hora *</label>
-                            <button type="button" id="timeTrigger" class="picker-trigger">Selecciona hora ⏰</button>
+                            <button type="button" id="timeTrigger" class="picker-trigger">
+                                <span>Selecciona hora</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </button>
 
                             <div id="timeDropdown" class="datum-dropdown">
                                 <div class="time-slots compact" id="timeSlots">
@@ -493,7 +529,7 @@
 
                         // Update Trigger Text
                         const niceDate = dayDate.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
-                        dateTrigger.textContent = `📅 ${niceDate}`;
+                        dateTrigger.innerHTML = `<span>${niceDate}</span> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>`;
 
                         // Validate time if switching to Today
                         if (inputHora.value) {
@@ -507,7 +543,7 @@
                                 // If selected time has passed, clear it
                                 if (h < currentHour || (h === currentHour && m <= currentMinute)) {
                                     inputHora.value = '';
-                                    timeTrigger.textContent = 'Selecciona hora ⏰';
+                                    timeTrigger.innerHTML = `<span>Selecciona hora</span> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`;
                                 }
                             }
                         }
@@ -558,7 +594,7 @@
                         btn.classList.add('selected');
 
                         // Update Trigger Text
-                        timeTrigger.textContent = `⏰ ${time}`;
+                        timeTrigger.innerHTML = `<span>${time}</span> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`;
                         closeAllDropdowns();
                     });
                 }
