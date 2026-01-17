@@ -18,20 +18,50 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  padding: 14px 22px;
   background: #000;
-  border-radius: 40px;
+  border-radius: 50px;
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
-  animation: bounce 1.5s infinite;
   z-index: 9999;
   color: white;
   font-size: 15px;
   font-weight: 600;
   white-space: nowrap;
+  transition: all 0.3s ease;
+  padding: 12px;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+
+#chatBubble:hover {
+  width: auto;
+  padding: 12px 20px;
+  border-radius: 40px;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+#chatBubble svg {
+  min-width: 24px;
+  min-height: 24px;
+}
+
+#chatBubble span {
+  opacity: 0;
+  max-width: 0;
+  transition: all 0.3s ease;
+  display: inline-block;
+  overflow: hidden;
+}
+
+#chatBubble:hover span {
+  opacity: 1;
+  max-width: 200px;
 }
 
 /* bolita animada */
@@ -189,11 +219,11 @@
   // ===========================
   //     BURBUJA FLOTANTE
   // ===========================
-  const bubble = document.createElement("div");
-  bubble.id = "chatBubble";
   bubble.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
     <span>Pregúntame cualquier duda</span>
-    <span class="mini"></span>
   `;
   document.body.appendChild(bubble);
 
@@ -219,7 +249,7 @@
   bubble.onclick = () => {
     widget.style.display = widget.style.display === "flex" ? "none" : "flex";
     if (!window.initialMessageSent) {
-      document.getElementById("chatMessages").innerHTML += 
+      document.getElementById("chatMessages").innerHTML +=
         `<div class="msg botMsg">¡Hola! 👋 ¿En qué puedo ayudarte?</div>`;
       window.initialMessageSent = true;
     }
