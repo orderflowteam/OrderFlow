@@ -85,6 +85,14 @@
             </div>
           </div>
 
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label style="font-weight: 600; color: #fff;">Mensaje *</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos brevemente tu duda o en qué podemos ayudarte"
+              rows="4"
+              style="padding: 12px; border-radius: 8px; border: 1px solid #444; background: #222; color: #fff; resize: vertical;"
+              required></textarea>
+          </div>
+
           <button type="submit"
             style="margin-top: 10px; padding: 15px; font-weight: bold; font-size: 1.1rem; border-radius: 8px; transition: 0.3s; background: #47a2e8;">Enviar</button>
         </form>
@@ -191,6 +199,7 @@
         email: document.getElementById("email").value,
         pais: document.getElementById("pais").value,
         telefono: document.getElementById("telefono").value,
+        mensaje: document.getElementById("mensaje").value,
       };
 
       // Estado de envío
@@ -286,10 +295,10 @@
     }
   </script>
   <script>
-    window.CHATBOT_ENDPOINT = "http://localhost:5678/webhook-test/contacto-orderflow";
+    window.CHATBOT_ENDPOINT = "https://orderflowagency.app.n8n.cloud/webhook/bf6397e7-fac0-471c-9572-7666849750b2";
   </script>
 
-  <script src="https://orderflowteam.github.io/OrderFlow/chat-widget.js"></script>
+  <script src="./chat-widget.js"></script>
 
 </body>
 

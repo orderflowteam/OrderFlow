@@ -19,36 +19,35 @@
   bottom: 20px;
   right: 20px;
   background: #000;
-  border-radius: 50px;
+  border-radius: 25px; /* Mitad de 50px para círculo perfecto */
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
   z-index: 9999;
   color: white;
   font-size: 15px;
   font-weight: 600;
   white-space: nowrap;
-  transition: all 0.3s ease;
-  padding: 12px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   width: 50px;
   height: 50px;
   overflow: hidden;
+  padding: 0; /* Centrado perfecto sin padding inicial */
 }
 
 #chatBubble:hover {
   width: auto;
-  padding: 12px 20px;
+  padding: 0 20px;
   border-radius: 40px;
-  justify-content: flex-start;
   gap: 10px;
 }
 
 #chatBubble svg {
   min-width: 24px;
   min-height: 24px;
+  flex-shrink: 0;
 }
 
 #chatBubble span {
@@ -219,6 +218,8 @@
   // ===========================
   //     BURBUJA FLOTANTE
   // ===========================
+  const bubble = document.createElement("div");
+  bubble.id = "chatBubble";
   bubble.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
