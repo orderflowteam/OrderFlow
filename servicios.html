@@ -170,6 +170,8 @@
       letter-spacing: 0.5px;
       position: relative;
       padding-bottom: 15px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     .card-title::after {
@@ -217,10 +219,19 @@
       .cards-container {
         flex-direction: column;
         align-items: center;
+        width: 100%;
+        gap: 20px;
       }
 
       .service-card {
         width: 100%;
+        flex: 1 1 auto;
+        max-width: 100%;
+        padding: 20px;
+      }
+
+      .page-description {
+        padding: 0 10px;
       }
     }
 
