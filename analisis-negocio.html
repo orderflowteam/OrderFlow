@@ -101,7 +101,7 @@
                     </svg>
                     Agenda tu llamada de diagnóstico
                 </h2>
-                <form action="#" method="POST"> <!-- Placeholder action -->
+                <form id="diagnostico-form"> <!-- Vinculado al Webhook solicitado -->
                     <label for="nombre" style="display: block; font-weight: 600;">Nombre y apellidos *</label>
                     <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
 
@@ -677,6 +677,63 @@
         }
 
         window.CHATBOT_ENDPOINT = "https://orderflowagency.app.n8n.cloud/webhook/bf6397e7-fac0-471c-9572-7666849750b2";
+
+        // Envío exclusivo de Diagnóstico al webhook: http://localhost:5678/webhook/9f86fa9b-0f03-4a5b-9c0a-1660ee8029b6
+        document.getElementById("diagnostico-form").addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            const originalText = submitBtn.textContent;
+            const originalBg = submitBtn.style.backgroundColor || '#47a2e8';
+
+            const data = {
+                nombre: document.getElementById("nombre").value,
+                empresa: document.getElementById("negocio").value,
+                sector: document.getElementById("tipo").value,
+                email: document.getElementById("email").value,
+                pais: document.getElementById("pais").value,
+                telefono: document.getElementById("telefono").value,
+                problemas: document.getElementById("problemas").value,
+                fecha: document.getElementById("fecha").value,
+                hora: document.getElementById("hora").value
+            };
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.style.backgroundColor = '#6c757d';
+
+            try {
+                const response = await fetch("http://localhost:5678/webhook/9f86fa9b-0f03-4a5b-9c0a-1660ee8029b6", {
+                    method: "POST",
+                    mode: "cors",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    submitBtn.textContent = '¡Enviado!';
+                    submitBtn.style.backgroundColor = '#28a745';
+                    form.reset();
+                    // Reset labels
+                    document.getElementById('dateTrigger').querySelector('span').innerText = 'Selecciona fecha';
+                    document.getElementById('timeTrigger').querySelector('span').innerText = 'Selecciona hora';
+                } else {
+                    submitBtn.textContent = 'Error';
+                    submitBtn.style.backgroundColor = '#dc3545';
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                submitBtn.textContent = 'Error';
+                submitBtn.style.backgroundColor = '#dc3545';
+            } finally {
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.backgroundColor = originalBg;
+                }, 3000);
+            }
+        });
     </script>
     <script src="./chat-widget.js"></script>
 </body>
