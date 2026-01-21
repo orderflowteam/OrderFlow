@@ -25,8 +25,8 @@
             <a href="index.html" style="font-family: 'Playfair Display', serif;">Inicio</a>
             <a href="sobre-nosotros.html" style="font-family: 'Playfair Display', serif;">Sobre Nosotros</a>
             <a href="servicios.html" style="font-family: 'Playfair Display', serif;">Servicios</a>
-            <a href="analisis-negocio.html" class="active"
-                style="font-family: 'Playfair Display', serif;">Diagnóstico</a>
+            <a href="analisis-negocio.html" class="nav-cta active"
+                style="font-family: 'Playfair Display', serif;">Solicitar Diagnóstico</a>
             <a href="contacto.html" style="font-family: 'Playfair Display', serif;">Contacto</a>
         </nav>
     </header>
@@ -75,7 +75,7 @@
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg> Duración: <strong>15–20 minutos</strong>
+                        </svg> Duración: <strong>30 minutos</strong>
                     </div>
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -269,6 +269,35 @@
                 padding: 10px 0;
                 width: 100%;
                 border-radius: 0;
+            }
+        }
+
+        nav a.nav-cta {
+            background: #47a2e8;
+            color: white !important;
+            border: 1px solid #47a2e8;
+            border-radius: 8px;
+            padding: 8px 20px !important;
+            font-weight: bold;
+            margin-left: 30px;
+            box-shadow: 0 0 15px rgba(71, 162, 232, 0.8), 0 4px 14px rgba(71, 162, 232, 0.4);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        nav a.nav-cta:hover {
+            background: #0078d4;
+            border-color: #0078d4;
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(71, 162, 232, 1), 0 6px 20px rgba(0, 120, 212, 0.6);
+            text-decoration: none;
+        }
+
+        @media (max-width: 700px) {
+            nav a.nav-cta {
+                margin-left: 0;
+                margin-top: 10px;
+                text-align: center;
             }
         }
 

@@ -23,7 +23,8 @@
       <a href="index.html" class="active" style="font-family: 'Playfair Display', serif;">Inicio</a>
       <a href="sobre-nosotros.html" style="font-family: 'Playfair Display', serif;">Sobre Nosotros</a>
       <a href="servicios.html" style="font-family: 'Playfair Display', serif;">Servicios</a>
-      <a href="analisis-negocio.html" style="font-family: 'Playfair Display', serif;">Diagnóstico</a>
+      <a href="analisis-negocio.html" class="nav-cta" style="font-family: 'Playfair Display', serif;">Solicitar
+        Diagnóstico</a>
       <a href="contacto.html" style="font-family: 'Playfair Display', serif;">Contacto</a>
     </nav>
   </header>
@@ -44,6 +45,10 @@
       <p style="text-align:left;"><!-- Editable -->
         Crece tu negocio con OrderFlow: nuestra automatización de tareas repetitivas te permite mejorar la atención al
         cliente, ahorrar tiempo y aumentar tus ventas.</p>
+
+      <div style="text-align: left; margin-top: 40px;">
+        <a href="analisis-negocio.html" class="hero-cta">Solicitar Diagnóstico gratuito</a>
+      </div>
     </section>
 
     <section class="benefits-section"
@@ -151,6 +156,56 @@
         width: 100%;
         border-radius: 0;
       }
+    }
+
+    nav a.nav-cta {
+      background: #47a2e8;
+      color: white;
+      border: 1px solid #47a2e8;
+      border-radius: 8px;
+      padding: 8px 20px;
+      font-weight: bold;
+      margin-left: 30px;
+      box-shadow: 0 0 15px rgba(71, 162, 232, 0.8), 0 4px 14px rgba(71, 162, 232, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    nav a.nav-cta:hover {
+      background: #0078d4;
+      border-color: #0078d4;
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(71, 162, 232, 1), 0 6px 20px rgba(0, 120, 212, 0.6);
+      text-decoration: none;
+    }
+
+    /* Hero CTA Button Style - Transparent with Outline */
+    .hero-cta {
+      display: inline-block;
+      background: transparent;
+      color: #47a2e8;
+      text-decoration: none;
+      padding: 16px 36px;
+      border-radius: 12px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      font-family: 'Playfair Display', serif;
+      border: 2px solid #47a2e8;
+      box-shadow: 0 4px 15px rgba(71, 162, 232, 0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-cta:hover {
+      transform: scale(0.95);
+      background: #47a2e8;
+      color: white;
+      box-shadow: 0 0 20px rgba(71, 162, 232, 0.6);
+      border-color: #47a2e8;
+    }
+
+    .hero-cta:active {
+      transform: scale(0.9);
     }
   </style>
 
