@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OrderFlow - Inicio</title>
   <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="faviconorderflow.png">
 </head>
 
-<body>
+<body class="home-page">
   <header>
-    <div class="logo" style="font-family: 'Playfair Display', serif;">OrderFlow</div>
+    <div class="logo" style="font-family: 'Inter', sans-serif;">OrderFlow</div>
     <input type="checkbox" id="menu-toggle" style="display:none;">
     <label for="menu-toggle" class="menu-icon">
       <span></span>
@@ -20,77 +20,152 @@
       <span></span>
     </label>
     <nav>
-      <a href="index.html" class="active" style="font-family: 'Playfair Display', serif;">Inicio</a>
-      <a href="sobre-nosotros.html" style="font-family: 'Playfair Display', serif;">Sobre Nosotros</a>
-      <a href="servicios.html" style="font-family: 'Playfair Display', serif;">Servicios</a>
-      <a href="analisis-negocio.html" class="nav-cta" style="font-family: 'Playfair Display', serif;">Solicitar
+      <a href="index.html" class="active" style="font-family: 'Inter', sans-serif;">Inicio</a>
+      <a href="sobre-nosotros.html" style="font-family: 'Inter', sans-serif;">Sobre Nosotros</a>
+      <a href="servicios.html" style="font-family: 'Inter', sans-serif;">Servicios</a>
+      <a href="analisis-negocio.html" class="nav-cta" style="font-family: 'Inter', sans-serif;">Solicitar
         Diagnóstico</a>
-      <a href="contacto.html" style="font-family: 'Playfair Display', serif;">Contacto</a>
+      <a href="contacto.html" style="font-family: 'Inter', sans-serif;">Contacto</a>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <h1 style="font-family: 'Playfair Display', serif; color: #fff; line-height:1.1; text-align:left;">Automatiza tu
+      <h1 style="font-family: 'Inter', sans-serif; color: #fff; line-height:1.1; text-align:left;">Automatiza tu
         negocio con<br>
-        <span style="font-family: 'Playfair Display', serif; position:relative; display:inline-block;">
-          <span style="font-family: Playfair Display;">
-            <span style="font-family: Playfair Display;">O<span
+        <span style="font-family: 'Inter', sans-serif; position:relative; display:inline-block;">
+          <span style="font-family: 'Inter', sans-serif;">
+            <span style="font-family: 'Inter', sans-serif;">O<span
                 style="border-bottom:3.5px solid #47a2e8; position:absolute; left:0; right:0; bottom:-2px; width: 1.2em; display:inline-block;"></span>r</span>derFlow
           </span>
         </span>
       </h1>
-      <p style="font-family: Playfair Display;color:#4eaaf1; text-align:left;"><!-- Editable --> Ahorra tiempo, optimiza
+      <p style="font-family: 'Inter', sans-serif;color:#4eaaf1; text-align:left;"><!-- Editable --> Ahorra tiempo,
+        optimiza
         tu negocio y deja de preocuparte por tareas repetitivas.</p>
       <p style="text-align:left;"><!-- Editable -->
         Crece tu negocio con OrderFlow: nuestra automatización de tareas repetitivas te permite mejorar la atención al
         cliente, ahorrar tiempo y aumentar tus ventas.</p>
 
       <div style="text-align: left; margin-top: 40px;">
-        <a href="analisis-negocio.html" class="hero-cta">Solicitar Diagnóstico gratuito</a>
+        <a href="analisis-negocio.html" class="hero-cta">Solicitar diagnóstico</a>
       </div>
     </section>
 
     <section class="benefits-section"
       style="width:100vw; position:relative; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw;">
+
       <div class="benefits-content">
-        <div class="benefits-image">
-          <!-- Pon aquí la URL de tu foto -->
-          <img
-            src="https://burst.shopifycdn.com/photos/making-a-budget-tracking-finances.jpg?width=1850&format=pjpg&exif=0&iptc=0"
-            alt="Beneficio imagen" style="width:300px; height:auto; background:#222; object-fit:cover;">
-        </div>
-        <div class="benefits-list">
-          <h2 style="color:white; font-family: 'Playfair Display', serif; margin-bottom:28px;">Beneficios</h2>
+        <!-- Left: Text -->
+        <div class="benefits-list" style="flex: 1;">
+          <h2 style="color:white; font-family: 'Inter', sans-serif; margin-bottom:28px;">Beneficios</h2>
           <ul class="benefits-ul">
             <li>
-              <svg class="benefit-icon" viewBox="0 0 24 24">
-                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
-                <path
-                  d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
-                <path d="M9 12H4s.55-3.03 2-5c1.62-2.2 5-3 5-3" />
-                <path d="M12 15v5s3.03-.55 5-2c2.2-1.62 3-5 3-5" />
-              </svg>
-              <span><strong>Ahorra tiempo</strong> – Deja que las tareas repetitivas se hagan solas.</span>
+              <div class="benefit-icon-box" style="background:rgba(71, 162, 232, 0.1); padding:8px; border-radius:8px;">
+                <svg class="benefit-icon" viewBox="0 0 24 24" style="width:20px; height:20px;">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                  <path
+                    d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                  <path d="M9 12H4s.55-3.03 2-5c1.62-2.2 5-3 5-3" />
+                  <path d="M12 15v5s3.03-.55 5-2c2.2-1.62 3-5 3-5" />
+                </svg>
+              </div>
+              <div style="margin-left:15px;">
+                <strong style="display:block; margin-bottom:4px; font-size:1.1rem;">Ahorra tiempo</strong>
+                <span style="font-size:0.95rem; color:#aaa;">Deja que las tareas repetitivas se hagan solas.</span>
+              </div>
             </li>
             <li>
-              <svg class="benefit-icon" viewBox="0 0 24 24">
-                <line x1="12" y1="2" x2="12" y2="22"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-              <span><strong>Reduce errores</strong> – Ahorro de costes y errores, al tener procesos más rápidos y
-                ordenados.</span>
+              <div class="benefit-icon-box" style="background:rgba(71, 162, 232, 0.1); padding:8px; border-radius:8px;">
+                <svg class="benefit-icon" viewBox="0 0 24 24" style="width:20px; height:20px;">
+                  <line x1="12" y1="2" x2="12" y2="22"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+              <div style="margin-left:15px;">
+                <strong style="display:block; margin-bottom:4px; font-size:1.1rem;">Ahorra dinero</strong>
+                <span style="font-size:0.95rem; color:#aaa;">Ahorro de costes y errores, al tener procesos más rápidos y
+                  ordenados.</span>
+              </div>
             </li>
             <li>
-              <svg class="benefit-icon" viewBox="0 0 24 24">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-              </svg>
-              <span><strong>Mayor control</strong> – Tus procesos funcionan solos sin esfuerzo.</span>
+              <div class="benefit-icon-box" style="background:rgba(71, 162, 232, 0.1); padding:8px; border-radius:8px;">
+                <svg class="benefit-icon" viewBox="0 0 24 24" style="width:20px; height:20px;">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+              <div style="margin-left:15px;">
+                <strong style="display:block; margin-bottom:4px; font-size:1.1rem;">Procesos automáticos</strong>
+                <span style="font-size:0.95rem; color:#aaa;">Tus procesos funcionan solos sin esfuerzo.</span>
+              </div>
             </li>
           </ul>
           <a class="benefits-link" href="sobre-nosotros.html"
-            style="display:inline-block; margin-top:12px; color:#47a2e8; text-decoration:underline; font-family: 'Playfair Display', serif;">Sobre
+            style="display:inline-block; margin-top:12px; color:#47a2e8; text-decoration:underline; font-family: 'Inter', sans-serif;">Sobre
             Nosotros</a>
+        </div>
+
+        <!-- Right: Visual -->
+        <div class="saas-visual">
+          <div class="saas-window">
+            <div class="window-header">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+            <div class="window-body">
+              <!-- Node 1 -->
+              <div class="flow-node">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <span>Data</span>
+              </div>
+
+              <!-- Arrow -->
+              <div class="flow-line">
+                <div class="flow-dot"></div>
+              </div>
+
+              <!-- Node 2 (Center) -->
+              <div class="flow-node active-node ai-pulse">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <span>AI Engine</span>
+              </div>
+
+              <!-- Arrow -->
+              <div class="flow-line delay-line">
+                <div class="flow-dot"></div>
+              </div>
+
+              <!-- Node 3 -->
+              <div class="flow-node">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+                <span>Action</span>
+              </div>
+
+              <!-- Floating Card -->
+              <div class="float-card">
+                <div
+                  style="background:#28a745; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:14px;">
+                  ✓</div>
+                <div>
+                  <small style="color:#aaa;">Tiempo Ahorrado</small>
+                  <strong style="color:white; display:block;">+120h/mes</strong>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -156,6 +231,12 @@
         width: 100%;
         border-radius: 0;
       }
+
+      nav a.nav-cta {
+        margin-left: 0;
+        margin-top: 10px;
+        width: fit-content;
+      }
     }
 
     nav a.nav-cta {
@@ -181,14 +262,14 @@
     /* Hero CTA Button Style - Transparent with Outline */
     .hero-cta {
       display: inline-block;
-      background: transparent;
-      color: #47a2e8;
+      background: #47a2e8;
+      color: white;
       text-decoration: none;
-      padding: 16px 36px;
-      border-radius: 12px;
-      font-size: 1.25rem;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-size: 1.1rem;
       font-weight: 800;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif;
       border: 2px solid #47a2e8;
       box-shadow: 0 4px 15px rgba(71, 162, 232, 0.2);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
