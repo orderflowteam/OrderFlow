@@ -71,8 +71,10 @@
                 </svg>
               </div>
               <div style="margin-left:15px;">
-                <strong style="display:block; margin-bottom:4px; font-size:1.1rem;">Ahorra tiempo</strong>
-                <span style="font-size:0.95rem; color:#aaa;">Deja que las tareas repetitivas se hagan solas.</span>
+                <strong style="display:block; margin-bottom:4px; font-size:1.1rem;">Escalabilidad</strong>
+                <span style="font-size:0.95rem; color:#aaa;">Capacidad para atender más clientes y operaciones sin
+                  necesidad
+                  de ampliar el equipo ni complicar la gestión.</span>
               </div>
             </li>
             <li>
@@ -83,9 +85,9 @@
                 </svg>
               </div>
               <div style="margin-left:15px;">
-                <strong style="display:block; margin-bottom:4px; font-size:1.1rem;">Ahorra dinero</strong>
-                <span style="font-size:0.95rem; color:#aaa;">Ahorro de costes y errores, al tener procesos más rápidos y
-                  ordenados.</span>
+                <strong style="display:block; margin-bottom:4px; font-size:1.1rem;">Operativa optimizada</strong>
+                <span style="font-size:0.95rem; color:#aaa;">Flujos de trabajo claros y coordinados
+                  que reducen errores y mejoran la eficiencia diaria del equipo.</span>
               </div>
             </li>
             <li>
@@ -96,7 +98,9 @@
               </div>
               <div style="margin-left:15px;">
                 <strong style="display:block; margin-bottom:4px; font-size:1.1rem;">Procesos automáticos</strong>
-                <span style="font-size:0.95rem; color:#aaa;">Tus procesos funcionan solos sin esfuerzo.</span>
+                <span style="font-size:0.95rem; color:#aaa;">Los procesos se ejecutan solos de forma automática,
+                  reduciendo
+                  tareas manuales y fricción en el día a día.</span>
               </div>
             </li>
           </ul>
@@ -109,60 +113,77 @@
         <div class="saas-visual">
           <div class="saas-window">
             <div class="window-header">
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
+              <div class="dot red"></div>
+              <div class="dot yellow"></div>
+              <div class="dot green"></div>
+              <div class="header-bar"></div>
             </div>
+
             <div class="window-body">
-              <!-- Node 1 -->
-              <div class="flow-node">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                  <polyline points="14 2 14 8 20 8"></polyline>
-                  <line x1="16" y1="13" x2="8" y2="13"></line>
-                  <line x1="16" y1="17" x2="8" y2="17"></line>
-                  <polyline points="10 9 9 9 8 9"></polyline>
+              <div class="svg-container">
+                <svg viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet" class="automation-svg">
+                  <defs>
+                    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="6" result="blur" />
+                      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#2b7a9e" stop-opacity="0.1" />
+                      <stop offset="50%" stop-color="#47a2e8" stop-opacity="0.6" />
+                      <stop offset="100%" stop-color="#2b7a9e" stop-opacity="0.1" />
+                    </linearGradient>
+                    <linearGradient id="nodeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#2b7a9e" stop-opacity="0.3" />
+                      <stop offset="100%" stop-color="#151b24" stop-opacity="0.6" />
+                    </linearGradient>
+                  </defs>
+
+                  <!-- Background Lines -->
+                  <g class="flow-lines">
+                    <!-- Top Input to Center -->
+                    <path d="M120 130 C 245 130, 245 200, 370 200" stroke="url(#lineGradient)" stroke-width="2"
+                      fill="none" class="flow-path" />
+                    <!-- Bottom Input to Center -->
+                    <path d="M120 270 C 245 270, 245 200, 370 200" stroke="url(#lineGradient)" stroke-width="2"
+                      fill="none" class="flow-path delay-2" />
+                    <!-- Center to Output -->
+                    <path d="M430 200 L 700 200" stroke="url(#lineGradient)" stroke-width="2" fill="none"
+                      class="flow-path delay-3" />
+                  </g>
+
+                  <!-- Nodes -->
+                  <!-- Input 1 (Top, Resized 60x60) -->
+                  <g class="node-group">
+                    <rect x="60" y="100" width="60" height="60" rx="16" class="node-rect error" />
+                    <path d="M80 120 L100 140 M100 120 L80 140" stroke="#ff5f56" stroke-width="2"
+                      stroke-linecap="round" />
+                  </g>
+
+                  <!-- Input 2 (Bottom, Resized 60x60) -->
+                  <g class="node-group">
+                    <rect x="60" y="240" width="60" height="60" rx="16" class="node-rect error" />
+                    <path d="M80 260 L100 280 M100 260 L80 280" stroke="#ff5f56" stroke-width="2"
+                      stroke-linecap="round" />
+                  </g>
+
+                  <!-- Center Node (60x60) -->
+                  <g class="center-group">
+                    <rect x="370" y="170" width="60" height="60" rx="16" class="node-rect center pulse-center" />
+                    <!-- Sync Icon SVG -->
+                    <g transform="translate(382, 182) scale(1.5)">
+                      <path
+                        d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"
+                        fill="#47a2e8" opacity="0.9" />
+                    </g>
+                  </g>
+
+                  <!-- Output Node -->
+                  <g class="node-group">
+                    <rect x="700" y="170" width="60" height="60" rx="16" class="node-rect output" />
+                    <polyline points="718 200 726 208 742 192" fill="none" stroke="#2ecc71" stroke-width="3"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                  </g>
                 </svg>
-                <span>Data</span>
-              </div>
-
-              <!-- Arrow -->
-              <div class="flow-line">
-                <div class="flow-dot"></div>
-              </div>
-
-              <!-- Node 2 (Center) -->
-              <div class="flow-node active-node ai-pulse">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                  <line x1="8" y1="21" x2="16" y2="21"></line>
-                  <line x1="12" y1="17" x2="12" y2="21"></line>
-                </svg>
-                <span>AI Engine</span>
-              </div>
-
-              <!-- Arrow -->
-              <div class="flow-line delay-line">
-                <div class="flow-dot"></div>
-              </div>
-
-              <!-- Node 3 -->
-              <div class="flow-node">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                </svg>
-                <span>Action</span>
-              </div>
-
-              <!-- Floating Card -->
-              <div class="float-card">
-                <div
-                  style="background:#28a745; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:14px;">
-                  ✓</div>
-                <div>
-                  <small style="color:#aaa;">Tiempo Ahorrado</small>
-                  <strong style="color:white; display:block;">+120h/mes</strong>
-                </div>
               </div>
             </div>
           </div>
@@ -245,7 +266,7 @@
       border: 1px solid #47a2e8;
       border-radius: 8px;
       padding: 8px 20px;
-      font-weight: bold;
+      font-weight: 500;
       margin-left: 30px;
       box-shadow: 0 0 15px rgba(71, 162, 232, 0.8), 0 4px 14px rgba(71, 162, 232, 0.4);
       transition: all 0.3s ease;
@@ -268,7 +289,7 @@
       padding: 12px 28px;
       border-radius: 50px;
       font-size: 1.1rem;
-      font-weight: 800;
+      font-weight: 500;
       font-family: 'Inter', sans-serif;
       border: 2px solid #47a2e8;
       box-shadow: 0 4px 15px rgba(71, 162, 232, 0.2);

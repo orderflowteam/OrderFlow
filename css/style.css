@@ -35,7 +35,7 @@ footer {
 
 /* Beneficios personalizados */
 .benefits-section {
-	background: rgba(0, 0, 0, 0.4);
+	background: rgba(0, 0, 0, 0.2);
 	padding: 50px 20px;
 	width: 100vw;
 	position: relative;
@@ -102,7 +102,7 @@ footer {
 
 body {
 	/* Background with dark overlay matching benefits section style */
-	background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), radial-gradient(circle at 0% 50%, #2b7a9e 0%, transparent 110%), radial-gradient(circle at 100% 70%, #2f3542 0%, transparent 50%), #151b24;
+	background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), radial-gradient(circle at 0% 50%, #2b7a9e 0%, transparent 110%), radial-gradient(circle at 100% 70%, #2f3542 0%, transparent 50%), #151b24;
 	background-attachment: fixed;
 	color: #fff;
 	min-height: 100vh;
@@ -122,7 +122,7 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	padding: 15px 50px;
-	background: rgba(0, 0, 0, 0.4);
+	background: rgba(0, 0, 0, 0.2);
 	backdrop-filter: blur(12px);
 	-webkit-backdrop-filter: blur(12px);
 	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -191,7 +191,7 @@ main,
 }
 
 .card {
-	background: #313131;
+	background: #3a3a3a;
 	color: #fff;
 	padding: 24px;
 	border-radius: 12px;
@@ -566,212 +566,225 @@ img {
 	opacity: 0.6;
 }
 
-/* --- SaaS Visual Component --- */
+/* --- SaaS Dashboard & SVG Mockup --- */
 .saas-visual {
 	flex: 1;
 	display: flex;
 	justify-content: center;
-	position: relative;
+	align-items: center;
 	padding: 20px;
+	perspective: 1200px;
 }
 
 .saas-window {
-	background: rgba(30, 34, 45, 0.6);
-	backdrop-filter: blur(12px);
-	-webkit-backdrop-filter: blur(12px);
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	background: rgba(20, 25, 35, 0.85);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border: 1px solid rgba(255, 255, 255, 0.08);
 	border-radius: 16px;
 	width: 100%;
-	max-width: 480px;
-	padding: 20px;
-	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-	position: relative;
+	max-width: 550px;
+	box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 	overflow: hidden;
+	transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	transform: rotateX(5deg) rotateY(-5deg);
+}
+
+.saas-visual:hover .saas-window {
+	transform: rotateX(0deg) rotateY(0deg) translateY(-5px);
+	box-shadow: 0 30px 60px -12px rgba(71, 162, 232, 0.15);
+	border-color: rgba(71, 162, 232, 0.3);
 }
 
 .window-header {
 	display: flex;
+	align-items: center;
 	gap: 8px;
-	margin-bottom: 25px;
+	padding: 16px 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	background: rgba(0, 0, 0, 0.2);
 }
 
-.window-header .dot {
+.dot {
 	width: 10px;
 	height: 10px;
 	border-radius: 50%;
-	background: rgba(255, 255, 255, 0.2);
+}
+
+.dot.red {
+	background: #ff5f56;
+}
+
+.dot.yellow {
+	background: #ffbd2e;
+}
+
+.dot.green {
+	background: #27c93f;
+}
+
+.header-bar {
+	flex: 1;
+	height: 6px;
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 4px;
+	margin-left: 10px;
+	max-width: 150px;
 }
 
 .window-body {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
 	position: relative;
-	padding: 10px 0 30px 0;
+	padding: 0;
 }
 
-.flow-node {
-	background: rgba(255, 255, 255, 0.05);
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	border-radius: 12px;
-	padding: 12px;
-	width: 80px;
-	height: 80px;
+/* Dashboard Stats Row */
+.dashboard-stats {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 8px;
-	transition: all 0.3s ease;
-	z-index: 2;
+	justify-content: space-around;
+	padding: 15px 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+	background: rgba(255, 255, 255, 0.01);
 }
 
-.flow-node svg {
-	width: 24px;
-	height: 24px;
-	stroke: #a0a0a0;
-	transition: 0.3s;
+.d-stat {
+	text-align: center;
 }
 
-.flow-node span {
-	font-size: 0.75rem;
-	color: #888;
-	font-weight: 600;
-}
-
-.flow-node.active-node {
-	background: rgba(71, 162, 232, 0.1);
-	border-color: #47a2e8;
-	box-shadow: 0 0 20px rgba(71, 162, 232, 0.2);
-}
-
-.flow-node.active-node svg {
-	stroke: #47a2e8;
-}
-
-.flow-node.active-node span {
-	color: #fff;
-}
-
-/* Lines & Animation */
-.flow-line {
-	flex: 1;
-	height: 2px;
-	background: rgba(255, 255, 255, 0.1);
-	position: relative;
-	margin: 0 10px;
-	overflow: hidden;
-}
-
-.flow-dot {
-	width: 20px;
-	height: 2px;
-	background: #47a2e8;
-	position: absolute;
-	left: -20px;
-	box-shadow: 0 0 10px #47a2e8;
-	animation: flowMove 2s infinite linear;
-}
-
-.delay-line .flow-dot {
-	animation-delay: 1s;
-}
-
-@keyframes flowMove {
-	0% {
-		left: -20%;
-		opacity: 0;
-	}
-
-	20% {
-		opacity: 1;
-	}
-
-	80% {
-		opacity: 1;
-	}
-
-	100% {
-		left: 100%;
-		opacity: 0;
-	}
-}
-
-/* Central AI Node */
-.ai-pulse {
-	position: relative;
-}
-
-.ai-pulse::before,
-.ai-pulse::after {
-	content: '';
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 100%;
-	height: 100%;
-	border-radius: 12px;
-	border: 1px solid #47a2e8;
-	animation: pulseBorder 2s infinite;
-	z-index: -1;
-}
-
-.ai-pulse::after {
-	animation-delay: 0.5s;
-}
-
-@keyframes pulseBorder {
-	0% {
-		transform: translate(-50%, -50%) scale(1);
-		opacity: 0.8;
-	}
-
-	100% {
-		transform: translate(-50%, -50%) scale(1.6);
-		opacity: 0;
-	}
-}
-
-/* Floating Stat Card */
-.float-card {
-	position: absolute;
-	bottom: -15px;
-	right: -10px;
-	background: rgba(30, 34, 45, 0.9);
-	backdrop-filter: blur(10px);
-	border: 1px solid rgba(71, 162, 232, 0.4);
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-	padding: 10px 16px;
-	border-radius: 10px;
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	animation: floatCard 4s ease-in-out infinite;
-	z-index: 10;
-}
-
-.float-card small {
+.d-label {
 	display: block;
-	font-size: 0.7rem;
+	font-size: 0.65rem;
 	color: #888;
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
+	margin-bottom: 4px;
 }
 
-.float-card strong {
-	color: #4eaaf1;
-	font-size: 1.1rem;
+.d-value {
+	display: block;
+	font-size: 0.95rem;
+	font-weight: 700;
+	color: #fff;
 }
 
-@keyframes floatCard {
+.d-value.text-green {
+	color: #2ecc71;
+}
+
+.d-value.text-blue {
+	color: #47a2e8;
+}
+
+/* SVG Mockup Inside Window */
+.svg-container {
+	padding: 10px 0;
+	width: 100%;
+}
+
+.automation-svg {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+/* Node Styles */
+.node-rect {
+	fill: url(#nodeGradient);
+	stroke: rgba(71, 162, 232, 0.5);
+	stroke-width: 1.5;
+	transition: all 0.3s ease;
+}
+
+.node-rect.input {
+	fill: rgba(255, 255, 255, 0.03);
+	stroke: rgba(255, 255, 255, 0.1);
+}
+
+.node-rect.center {
+	stroke: #47a2e8;
+	stroke-width: 2;
+	fill: rgba(71, 162, 232, 0.15);
+}
+
+.node-rect.error {
+	stroke: #ff5f56;
+	fill: rgba(255, 95, 86, 0.1);
+}
+
+.node-rect.output {
+	stroke: #2ecc71;
+	fill: rgba(46, 204, 113, 0.15);
+}
+
+.automation-svg:hover .node-rect:hover {
+	fill: rgba(71, 162, 232, 0.25);
+	stroke: #fff;
+	filter: url(#glow);
+}
+
+/* Pulse Animation for Center Node */
+.pulse-center {
+	animation: pulseNode 3s infinite ease-in-out;
+	transform-box: fill-box;
+	transform-origin: center;
+}
+
+@keyframes pulseNode {
 
 	0%,
 	100% {
-		transform: translateY(0);
+		stroke-opacity: 0.6;
+		stroke-width: 2px;
+		filter: drop-shadow(0 0 5px rgba(71, 162, 232, 0.2));
 	}
 
 	50% {
-		transform: translateY(-8px);
+		stroke-opacity: 1;
+		stroke-width: 3px;
+		filter: drop-shadow(0 0 20px rgba(71, 162, 232, 0.6));
+	}
+}
+
+/* Flow Path Animation */
+.flow-path {
+	stroke-dasharray: 10 5;
+	animation: flowDash 0.8s linear infinite;
+	opacity: 0.8;
+	stroke-linecap: round;
+}
+
+.flow-path.delay-1 {
+	animation-delay: 0.1s;
+}
+
+.flow-path.delay-2 {
+	animation-delay: 0.2s;
+}
+
+.flow-path.delay-3 {
+	stroke-dasharray: 8 4;
+	animation-duration: 0.4s;
+	stroke: #2ecc71;
+}
+
+@keyframes flowDash {
+	to {
+		stroke-dashoffset: -15;
+	}
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+	.saas-visual {
+		padding: 10px;
+		perspective: none;
+	}
+
+	.saas-window {
+		transform: none;
+		max-width: 100%;
+	}
+
+	.saas-visual:hover .saas-window {
+		transform: none;
 	}
 }
