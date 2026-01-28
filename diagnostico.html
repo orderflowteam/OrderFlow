@@ -519,7 +519,7 @@
                 { id: 'm_segmenta', q: '¿Segmentas a tus clientes para promociones?', type: 'single', opts: ['No', 'Parcial', 'Sí'] }
             ],
             [SECTORES.SERVICIOS]: [
-                { id: 'm_autofollow', q: '¿Tienes seguimiento automático de leads?', type: 'single', opts: ['No', 'Manual', 'Automatizado'] },
+                { id: 'm_autofollow', q: '¿Tienes seguimiento de leads?', type: 'conditional', opts: ['No', 'Sí'], subQ: { trigger: 'Sí', id: 'm_autofollow_tipo', q: '¿Cómo lo haces?', opts: ['Manual', 'Automático'] } },
                 { id: 'm_nurture', q: '¿Nutres a los leads que no compran de inmediato?', type: 'conditional', opts: ['No', 'Sí'], subQ: { trigger: 'Sí', id: 'm_nurture_tipo', q: '¿Cómo lo haces?', opts: ['Manual', 'Automático'] } }
             ],
             [SECTORES.OTRO]: [
@@ -928,6 +928,9 @@
             questionFlow = ['sector', 'prioridad'];
             setTimeout(() => { renderStep(); }, 800);
         });
+    </script>
+    <script>
+        window.CHATBOT_ENDPOINT = "http://localhost:5678/webhook/3381e020-7a56-4240-a876-1a837682a5eb";
     </script>
     <script src="./chat-widget.js"></script>
 </body>

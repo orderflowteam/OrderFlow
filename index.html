@@ -47,7 +47,7 @@
         cliente, ahorrar tiempo y aumentar tus ventas.</p>
 
       <div style="text-align: left; margin-top: 40px;">
-        <a href="analisis-negocio.html" class="hero-cta">Empezar Diagnóstico</a>
+        <a href="analisis-negocio.html" class="hero-cta">Solicitar Diagnóstico</a>
       </div>
     </section>
 
@@ -279,39 +279,39 @@
       text-decoration: none;
     }
 
-    /* Hero CTA Button Style - Transparent with Outline */
+    /* Hero CTA Button Style - Premium & Refined */
     .hero-cta {
       display: inline-block;
-      background: #47a2e8;
+      background: linear-gradient(135deg, #47a2e8 0%, #3a8ed0 100%);
       color: white;
       text-decoration: none;
-      padding: 12px 28px;
+      padding: 16px 36px;
       border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: 500;
+      font-size: 1.15rem;
+      font-weight: 700;
       font-family: 'Inter', sans-serif;
-      border: 2px solid #47a2e8;
-      box-shadow: 0 4px 15px rgba(71, 162, 232, 0.2);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      box-shadow: 0 10px 25px rgba(71, 162, 232, 0.3);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
       overflow: hidden;
+      text-transform: capitalize;
     }
 
     .hero-cta:hover {
-      transform: scale(0.95);
-      background: #47a2e8;
-      color: white;
-      box-shadow: 0 0 20px rgba(71, 162, 232, 0.6);
-      border-color: #47a2e8;
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 15px 35px rgba(71, 162, 232, 0.5);
+      filter: brightness(1.1);
     }
 
     .hero-cta:active {
-      transform: scale(0.9);
+      transform: translateY(-1px) scale(0.98);
+      box-shadow: 0 5px 15px rgba(71, 162, 232, 0.4);
     }
   </style>
 
   <script>
-    window.CHATBOT_ENDPOINT = "https://orderflowagency.app.n8n.cloud/webhook/bf6397e7-fac0-471c-9572-7666849750b2";
+    window.CHATBOT_ENDPOINT = "http://localhost:5678/webhook/3381e020-7a56-4240-a876-1a837682a5eb";
   </script>
 
   <script src="./chat-widget.js"></script>
