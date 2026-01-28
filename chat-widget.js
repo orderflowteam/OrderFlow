@@ -266,14 +266,35 @@
     document.getElementById("chatText").value = "";
     msgBox.scrollTop = msgBox.scrollHeight;
 
-    const res = await fetch(window.CHATBOT_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: text })
-    });
+    try {
+      const res = await fetch(window.CHATBOT_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text })
+      });
 
-    const data = await res.json();
-    msgBox.innerHTML += `<div class="msg botMsg">${data.reply}</div>`;
+      const data = await res.json();
+      console.log("Chatbot response:", data);
+
+      let botReply = "";
+
+      // Manejar diferentes formatos de respuesta (n8n, OpenAI, etc.)
+      if (typeof data === 'string') {
+        botReply = data;
+      } else if (Array.isArray(data) && data.length > 0) {
+        botReply = data[0].output || data[0].reply || data[0].text || JSON.stringify(data[0]);
+      } else if (typeof data === 'object' && data !== null) {
+        botReply = data.output || data.reply || data.text || data.message || JSON.stringify(data);
+      } else {
+        botReply = "Lo siento, hubo un error al procesar la respuesta.";
+      }
+
+      msgBox.innerHTML += `<div class="msg botMsg">${botReply}</div>`;
+    } catch (err) {
+      console.error("Error fetching chatbot response:", err);
+      msgBox.innerHTML += `<div class="msg botMsg">Error: No se pudo conectar con el agente. Asegúrate de que el webhook esté activo.</div>`;
+    }
+
     msgBox.scrollTop = msgBox.scrollHeight;
   }
 
