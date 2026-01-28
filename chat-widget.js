@@ -266,6 +266,13 @@
     document.getElementById("chatText").value = "";
     msgBox.scrollTop = msgBox.scrollHeight;
 
+    // Crear indicador de "escribiendo"
+    const typingMsg = document.createElement("div");
+    typingMsg.className = "msg botMsg typing-indicator";
+    typingMsg.innerHTML = "<i>Escribiendo...</i>";
+    msgBox.appendChild(typingMsg);
+    msgBox.scrollTop = msgBox.scrollHeight;
+
     try {
       const res = await fetch(window.CHATBOT_ENDPOINT, {
         method: "POST",
@@ -273,26 +280,44 @@
         body: JSON.stringify({ message: text })
       });
 
+      if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
+
       const data = await res.json();
       console.log("Chatbot response:", data);
 
+      // Quitar indicador de carga
+      msgBox.removeChild(typingMsg);
+
       let botReply = "";
 
-      // Manejar diferentes formatos de respuesta (n8n, OpenAI, etc.)
-      if (typeof data === 'string') {
-        botReply = data;
-      } else if (Array.isArray(data) && data.length > 0) {
-        botReply = data[0].output || data[0].reply || data[0].text || JSON.stringify(data[0]);
-      } else if (typeof data === 'object' && data !== null) {
-        botReply = data.output || data.reply || data.text || data.message || JSON.stringify(data);
-      } else {
-        botReply = "Lo siento, hubo un error al procesar la respuesta.";
+      // Función para buscar texto de forma recursiva en la respuesta
+      function findMessage(obj) {
+        if (!obj) return null;
+        if (typeof obj === 'string') return obj;
+        if (Array.isArray(obj)) return findMessage(obj[0]);
+
+        // Prioridad de campos comunes
+        const priorityFields = ['output', 'text', 'reply', 'message', 'response', 'content', 'json'];
+        for (const field of priorityFields) {
+          if (obj[field]) {
+            const found = findMessage(obj[field]);
+            if (found) return found;
+          }
+        }
+        return null;
+      }
+
+      botReply = findMessage(data);
+
+      if (!botReply) {
+        botReply = "Recibí una respuesta pero el formato no es reconocido. Datos: " + JSON.stringify(data).substring(0, 100);
       }
 
       msgBox.innerHTML += `<div class="msg botMsg">${botReply}</div>`;
     } catch (err) {
+      if (msgBox.contains(typingMsg)) msgBox.removeChild(typingMsg);
       console.error("Error fetching chatbot response:", err);
-      msgBox.innerHTML += `<div class="msg botMsg">Error: No se pudo conectar con el agente. Asegúrate de que el webhook esté activo.</div>`;
+      msgBox.innerHTML += `<div class="msg botMsg"><b>Error:</b> No se pudo conectar con el agente. Verifica que n8n esté activo y acepte peticiones en ${window.CHATBOT_ENDPOINT}</div>`;
     }
 
     msgBox.scrollTop = msgBox.scrollHeight;
