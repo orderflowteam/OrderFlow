@@ -25,20 +25,21 @@
             <a href="index.html" style="font-family: 'Inter', sans-serif;">Inicio</a>
             <a href="sobre-nosotros.html" style="font-family: 'Inter', sans-serif;">Sobre Nosotros</a>
             <a href="servicios.html" style="font-family: 'Inter', sans-serif;">Servicios</a>
-            <a href="analisis-negocio.html" class="nav-cta active" style="font-family: 'Inter', sans-serif;">Solicitar
-                Diagnóstico</a>
+            <a href="analisis-negocio.html" class="nav-cta active"
+                style="font-family: 'Inter', sans-serif;">Diagnóstico</a>
             <a href="contacto.html" style="font-family: 'Inter', sans-serif;">Contacto</a>
         </nav>
     </header>
 
     <main>
         <section class="hero" style="text-align:center; padding: 60px 20px;">
-            <h1 style="font-family: 'Inter', sans-serif; margin-bottom: 20px; color: #fff;">Análisis del Negocio
+            <h1 style="font-family: 'Inter', sans-serif; margin-bottom: 20px; color: #fff;">Diagnóstico Inteligente del
+                Negocio
             </h1>
             <p style="max-width: 700px; margin: 0 auto; line-height: 1.6; font-size: 1.2rem;">
-                Agenda una llamada breve para entender cómo funciona tu negocio por dentro.
-                Analizamos tus procesos, detectamos cuellos de botella y te proponemos soluciones adaptadas a tu forma
-                de trabajar.
+                Realizamos un diagnóstico inteligente para entender cómo funciona tu negocio por dentro. Analizamos tus
+                procesos, detectamos cuellos de botella y oportunidades de automatización, y te devolvemos una visión
+                clara de mejora.
             </p>
             <div class="highlight-badge">
                 Sin compromiso <span class="separator"></span> Gratis
@@ -47,8 +48,8 @@
 
         <section class="content" style="max-width: 800px; margin: 0 auto; padding: 20px;">
             <div style="background: rgba(80, 80, 80, 0.4); padding: 30px; border-radius: 12px; margin-bottom: 40px;">
-                <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 20px; color: #fff;">¿Para qué es esta
-                    llamada?</h2>
+                <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 20px; color: #fff;">¿Para qué sirve?
+                </h2>
                 <ul style="list-style: none; padding: 0;">
                     <li style="margin-bottom: 15px; display: flex; align-items: start;">
                         <span style="color: #47a2e8; margin-right: 10px;">✓</span> Entender cómo gestionas tu
@@ -67,142 +68,18 @@
                         adaptadas a tu negocio
                     </li>
                 </ul>
-                <div
-                    style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg> Duración: <strong>30 minutos</strong>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path
-                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-                            </path>
-                        </svg> Formato: <strong>llamada</strong>
-                    </div>
-                </div>
             </div>
 
-            <div
-                style="background: #3a3a3a; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 60px;">
-                <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 25px; text-align: center;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        style="vertical-align:bottom; margin-right:8px;">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="16" y1="2" x2="16" y2="6"></line>
-                        <line x1="8" y1="2" x2="8" y2="6"></line>
-                        <line x1="3" y1="10" x2="21" y2="10"></line>
-                    </svg>
-                    Agenda tu llamada de diagnóstico
-                </h2>
-                <form id="diagnostico-form"> <!-- Vinculado al Webhook solicitado -->
-                    <label for="nombre" style="display: block; font-weight: 600;">Nombre y apellidos *</label>
-                    <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
-
-                    <label for="negocio" style="display: block; font-weight: 600;">Nombre de la Empresa *</label>
-                    <input type="text" id="negocio" name="negocio" required placeholder="Nombre de tu empresa">
-
-                    <label for="tipo" style="display: block; font-weight: 600;">Sector *</label>
-                    <input type="text" id="tipo" name="tipo" required
-                        placeholder="¿A qué sector perteneces? Ej: Inmobiliaria">
-
-                    <label for="email" style="display: block; font-weight: 600;">Email corporativo *</label>
-                    <input type="email" id="email" name="email" required placeholder="tu@email.com">
-
-                    <label for="telefono" style="display: block; font-weight: 600;">Teléfono *</label>
-                    <div style="display: flex; gap: 8px; align-items: center;">
-                        <div style="position: relative; width: 110px;">
-                            <div id="flag-container"
-                                style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 22px; height: 15px; pointer-events: none; background-size: cover; background-position: center; border-radius: 1px; z-index: 1;">
-                            </div>
-                            <select id="pais" name="pais"
-                                style="width: 100%; padding: 10px 8px 10px 40px; border-radius: 8px; border: 1px solid #555; background: #444; color: #fff; font-size: 1rem; appearance: none; -webkit-appearance: none; cursor: pointer;"
-                                required>
-                                <option value="+34" data-format="XXX XXX XXX" data-code="es">+34</option>
-                                <option value="+1" data-format="XXX XXX XXXX" data-code="us">+1</option>
-                                <option value="+44" data-format="XXXX XXXXXX" data-code="gb">+44</option>
-                                <option value="+33" data-format="X XX XX XX XX" data-code="fr">+33</option>
-                                <option value="+49" data-format="XXX XXXXXXXX" data-code="de">+49</option>
-                                <option value="+39" data-format="XXX XXX XXXX" data-code="it">+39</option>
-                                <option value="+351" data-format="XXX XXX XXX" data-code="pt">+351</option>
-                                <option value="+52" data-format="XX XXXX XXXX" data-code="mx">+52</option>
-                                <option value="+54" data-format="XX XXXX XXXX" data-code="ar">+54</option>
-                                <option value="+56" data-format="X XXXX XXXX" data-code="cl">+56</option>
-                                <option value="+57" data-format="XXX XXX XXXX" data-code="co">+57</option>
-                                <option value="+51" data-format="XXX XXX XXX" data-code="pe">+51</option>
-                                <option value="+55" data-format="XX XXXXX XXXX" data-code="br">+55</option>
-                            </select>
-                        </div>
-                        <input type="tel" id="telefono" name="telefono" required style="flex: 1;">
-                    </div>
-
-                    <label for="problemas" style="display: block; font-weight: 600;">Mensaje *</label>
-                    <textarea id="problemas" name="problemas" rows="4" required
-                        placeholder="Cuéntanos como podemos ayudarte..."></textarea>
-
-                    <!-- Date & Time Dropdowns -->
-                    <div style="display: flex; gap: 15px; margin-top: 15px; position: relative;">
-                        <!-- Date Dropdown -->
-                        <div style="flex: 1; position: relative;">
-                            <label style="display: block; font-weight: 600; margin-bottom: 5px;">Fecha *</label>
-                            <button type="button" id="dateTrigger" class="picker-trigger">
-                                <span>Selecciona fecha</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                    <line x1="16" y1="2" x2="16" y2="6"></line>
-                                    <line x1="8" y1="2" x2="8" y2="6"></line>
-                                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                                </svg>
-                            </button>
-
-                            <div id="calendarDropdown" class="datum-dropdown">
-                                <div class="calendar-header compact">
-                                    <button type="button" id="prevMonth" title="Mes anterior">&lt;</button>
-                                    <span id="monthYear"></span>
-                                    <button type="button" id="nextMonth" title="Mes siguiente">&gt;</button>
-                                </div>
-                                <div class="calendar-days-header compact">
-                                    <span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span>
-                                </div>
-                                <div class="calendar-grid compact" id="calendarGrid"></div>
-                            </div>
-                            <input type="hidden" id="fecha" name="fecha" required>
-                        </div>
-
-                        <!-- Time Dropdown -->
-                        <div style="flex: 1; position: relative;">
-                            <label style="display: block; font-weight: 600; margin-bottom: 5px;">Hora *</label>
-                            <button type="button" id="timeTrigger" class="picker-trigger">
-                                <span>Selecciona hora</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
-                            </button>
-
-                            <div id="timeDropdown" class="datum-dropdown">
-                                <div class="time-slots compact" id="timeSlots">
-                                    <div style="padding: 10px; text-align: center; font-size: 0.85rem; color: #aaa;">
-                                        Elige fecha primero</div>
-                                </div>
-                            </div>
-                            <input type="hidden" id="hora" name="hora" required>
-                        </div>
-                    </div>
-
-                    <button type="submit"
-                        style="margin-top: 15px; font-weight: bold; font-size: 1.1rem; padding: 12px;">Agendar
-                        diagnóstico</button>
-                </form>
+            <div style="text-align: center; margin-bottom: 60px;">
+                <a href="diagnostico.html" class="cta-button"
+                    style="display: inline-block; background-color: #47a2e8; color: white; padding: 15px 40px; border-radius: 8px; font-weight: bold; font-size: 1.2rem; text-decoration: none; transition: background 0.3s ease;">
+                    Iniciar diagnóstico
+                </a>
+                <p
+                    style="margin-top: 20px; font-size: 0.9rem; color: #ccc; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    En función de tus respuestas, analizaremos si existen oportunidades reales de mejora.
+                    Solo te contactaremos si vemos un encaje claro.
+                </p>
             </div>
         </section>
     </main>
@@ -470,298 +347,7 @@
         }
     </style>
 
-    <script>
-        // --- CUSTOM CALENDAR LOGIC ---
 
-        const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-        const availableHours = ["10:00", "11:00", "12:00", "16:00", "17:00", "18:00", "19:00"];
-
-        // State
-        let displayDate = new Date(); // Tracks the month being viewed
-        let selectedDateObj = null;   // Tracks the actual selected date
-        let selectedTime = null;
-
-        const calendarGrid = document.getElementById('calendarGrid');
-        const monthYearLabel = document.getElementById('monthYear');
-        const prevMonthBtn = document.getElementById('prevMonth');
-        const nextMonthBtn = document.getElementById('nextMonth');
-        const timeSlotsContainer = document.getElementById('timeSlots');
-
-        // Hidden Inputs
-        const inputFecha = document.getElementById('fecha');
-        const inputHora = document.getElementById('hora');
-
-        // Dropdown Logic
-        const dateTrigger = document.getElementById('dateTrigger');
-        const calendarDropdown = document.getElementById('calendarDropdown');
-        const timeTrigger = document.getElementById('timeTrigger');
-        const timeDropdown = document.getElementById('timeDropdown');
-
-        // Toggle visibility
-        dateTrigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            closeAllDropdowns();
-            calendarDropdown.classList.toggle('active');
-        });
-
-        timeTrigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            closeAllDropdowns();
-            timeDropdown.classList.toggle('active');
-        });
-
-        // Close when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.datum-dropdown') && !e.target.closest('.picker-trigger')) {
-                closeAllDropdowns();
-            }
-        });
-
-        function closeAllDropdowns() {
-            calendarDropdown.classList.remove('active');
-            timeDropdown.classList.remove('active');
-        }
-
-        // Initial Render
-        renderCalendar();
-        renderTimeSlots();
-
-        // Event Listeners for Nav
-        prevMonthBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // prevent closing
-            displayDate.setMonth(displayDate.getMonth() - 1);
-            renderCalendar();
-        });
-
-        nextMonthBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            displayDate.setMonth(displayDate.getMonth() + 1);
-            renderCalendar();
-        });
-
-        function renderCalendar() {
-            const year = displayDate.getFullYear();
-            const month = displayDate.getMonth();
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-
-            monthYearLabel.textContent = `${monthNames[month]} ${year}`;
-            calendarGrid.innerHTML = '';
-
-            const firstDayOfMonth = new Date(year, month, 1);
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-            let startDay = firstDayOfMonth.getDay() - 1;
-            if (startDay === -1) startDay = 6;
-
-            for (let i = 0; i < startDay; i++) {
-                const emptyCell = document.createElement('div');
-                emptyCell.className = 'calendar-day empty';
-                calendarGrid.appendChild(emptyCell);
-            }
-
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dayDate = new Date(year, month, day);
-                dayDate.setHours(0, 0, 0, 0);
-                const dayEl = document.createElement('div');
-                dayEl.textContent = day;
-                dayEl.className = 'calendar-day';
-
-                if (dayDate < today) dayEl.classList.add('disabled');
-                if (dayDate.getTime() === today.getTime()) dayEl.classList.add('today');
-
-                if (selectedDateObj && dayDate.getTime() === selectedDateObj.getTime()) {
-                    dayEl.classList.add('selected');
-                }
-
-                if (!dayEl.classList.contains('disabled')) {
-                    dayEl.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        selectedDateObj = dayDate;
-                        const isoDate = dayDate.toISOString().split('T')[0];
-                        inputFecha.value = isoDate;
-
-                        // Update Trigger Text
-                        const niceDate = dayDate.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
-                        dateTrigger.innerHTML = `<span>${niceDate}</span> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>`;
-
-                        // Validate time if switching to Today
-                        if (inputHora.value) {
-                            const now = new Date();
-                            const isToday = dayDate.toDateString() === now.toDateString();
-                            if (isToday) {
-                                const currentHour = now.getHours();
-                                const currentMinute = now.getMinutes();
-                                const [h, m] = inputHora.value.split(':').map(Number);
-
-                                // If selected time has passed, clear it
-                                if (h < currentHour || (h === currentHour && m <= currentMinute)) {
-                                    inputHora.value = '';
-                                    timeTrigger.innerHTML = `<span>Selecciona hora</span> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`;
-                                }
-                            }
-                        }
-
-                        renderCalendar();
-                        renderTimeSlots();
-
-                        // Auto-close cal, auto-open time? Or just close? User didn't specify. Let's just close cal.
-                        closeAllDropdowns();
-                        // Optional: Open time immediately for better UX
-                        timeDropdown.classList.add('active');
-                    });
-                }
-                calendarGrid.appendChild(dayEl);
-            }
-        }
-
-        function renderTimeSlots() {
-            timeSlotsContainer.innerHTML = '';
-
-            if (!selectedDateObj) {
-                timeSlotsContainer.innerHTML = '<div style="color: #bbb; grid-column: 1 / -1; text-align:center; padding: 10px; font-size: 0.8rem;">Elige fecha primero</div>';
-                return;
-            }
-
-            const now = new Date();
-            const isToday = selectedDateObj.toDateString() === now.toDateString();
-            const currentHour = now.getHours();
-            const currentMinute = now.getMinutes();
-
-            availableHours.forEach(time => {
-                const btn = document.createElement('div');
-                btn.className = 'time-slot-btn';
-                btn.textContent = time;
-
-                const [slotHour, slotMinute] = time.split(':').map(Number);
-                if (isToday && (slotHour < currentHour || (slotHour === currentHour && slotMinute <= currentMinute))) {
-                    btn.classList.add('disabled');
-                }
-
-                if (inputHora.value === time) btn.classList.add('selected');
-
-                if (!btn.classList.contains('disabled')) {
-                    btn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        inputHora.value = time;
-                        document.querySelectorAll('.time-slot-btn').forEach(b => b.classList.remove('selected'));
-                        btn.classList.add('selected');
-
-                        // Update Trigger Text
-                        timeTrigger.innerHTML = `<span>${time}</span> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`;
-                        closeAllDropdowns();
-                    });
-                }
-                timeSlotsContainer.appendChild(btn);
-            });
-        }
-
-        // Lógica de formateo de teléfono
-        const paisSelect = document.getElementById('pais');
-        const telefonoInput = document.getElementById('telefono');
-
-        if (paisSelect && telefonoInput) {
-            const flagContainer = document.getElementById('flag-container');
-
-            const updateFormat = () => {
-                const option = paisSelect.options[paisSelect.selectedIndex];
-                const format = option.getAttribute('data-format');
-                const countryCode = option.getAttribute('data-code');
-
-                // Actualizar bandera
-                if (flagContainer && countryCode) {
-                    flagContainer.style.backgroundImage = `url('https://flagcdn.com/w40/${countryCode}.png')`;
-                }
-
-                telefonoInput.placeholder = format;
-                telefonoInput.value = ''; // Limpiar al cambiar
-            };
-
-            const formatPhone = (e) => {
-                if (e.inputType === 'deleteContentBackward') return;
-
-                const format = paisSelect.options[paisSelect.selectedIndex].getAttribute('data-format');
-                let value = telefonoInput.value.replace(/\D/g, '');
-                let formattedValue = '';
-                let valueIndex = 0;
-
-                for (let i = 0; i < format.length && valueIndex < value.length; i++) {
-                    if (format[i] === 'X') {
-                        formattedValue += value[valueIndex];
-                        valueIndex++;
-                    } else {
-                        formattedValue += format[i];
-                    }
-                }
-                telefonoInput.value = formattedValue;
-            };
-
-            telefonoInput.addEventListener('input', formatPhone);
-            paisSelect.addEventListener('change', updateFormat);
-
-            // Inicializar al cargar
-            updateFormat();
-        }
-
-        window.CHATBOT_ENDPOINT = "https://orderflowagency.app.n8n.cloud/webhook/bf6397e7-fac0-471c-9572-7666849750b2";
-
-        // Envío exclusivo de Diagnóstico al webhook: http://localhost:5678/webhook/9f86fa9b-0f03-4a5b-9c0a-1660ee8029b6
-        document.getElementById("diagnostico-form").addEventListener("submit", async function (e) {
-            e.preventDefault();
-            const form = e.target;
-            const submitBtn = form.querySelector('button[type="submit"]');
-
-            const originalText = submitBtn.textContent;
-            const originalBg = submitBtn.style.backgroundColor || '#47a2e8';
-
-            const data = {
-                nombre: document.getElementById("nombre").value,
-                empresa: document.getElementById("negocio").value,
-                sector: document.getElementById("tipo").value,
-                email: document.getElementById("email").value,
-                pais: document.getElementById("pais").value,
-                telefono: document.getElementById("telefono").value,
-                problemas: document.getElementById("problemas").value,
-                fecha: document.getElementById("fecha").value,
-                hora: document.getElementById("hora").value
-            };
-
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Enviando...';
-            submitBtn.style.backgroundColor = '#6c757d';
-
-            try {
-                const response = await fetch("http://localhost:5678/webhook/9f86fa9b-0f03-4a5b-9c0a-1660ee8029b6", {
-                    method: "POST",
-                    mode: "cors",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data)
-                });
-
-                if (response.ok) {
-                    submitBtn.textContent = '¡Enviado!';
-                    submitBtn.style.backgroundColor = '#28a745';
-                    form.reset();
-                    // Reset labels
-                    document.getElementById('dateTrigger').querySelector('span').innerText = 'Selecciona fecha';
-                    document.getElementById('timeTrigger').querySelector('span').innerText = 'Selecciona hora';
-                } else {
-                    submitBtn.textContent = 'Error';
-                    submitBtn.style.backgroundColor = '#dc3545';
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                submitBtn.textContent = 'Error';
-                submitBtn.style.backgroundColor = '#dc3545';
-            } finally {
-                setTimeout(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = originalText;
-                    submitBtn.style.backgroundColor = originalBg;
-                }, 3000);
-            }
-        });
-    </script>
     <script src="./chat-widget.js"></script>
 </body>
 
