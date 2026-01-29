@@ -274,19 +274,31 @@
     msgBox.scrollTop = msgBox.scrollHeight;
 
     try {
+      console.log("Sending message to:", window.CHATBOT_ENDPOINT);
       const res = await fetch(window.CHATBOT_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: text })
       });
 
-      if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`HTTP Error: ${res.status} - ${errorText}`);
+      }
 
-      const data = await res.json();
-      console.log("Chatbot response:", data);
+      let data;
+      const contentType = res.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        data = await res.json();
+      } else {
+        const textResponse = await res.text();
+        data = { output: textResponse };
+      }
+
+      console.log("Chatbot response data:", data);
 
       // Quitar indicador de carga
-      msgBox.removeChild(typingMsg);
+      if (msgBox.contains(typingMsg)) msgBox.removeChild(typingMsg);
 
       let botReply = "";
 
@@ -294,30 +306,51 @@
       function findMessage(obj) {
         if (!obj) return null;
         if (typeof obj === 'string') return obj;
-        if (Array.isArray(obj)) return findMessage(obj[0]);
+        if (Array.isArray(obj)) {
+          // Si es un array, buscar en cada elemento hasta encontrar algo
+          for (const item of obj) {
+            const found = findMessage(item);
+            if (found) return found;
+          }
+          return null;
+        }
 
-        // Prioridad de campos comunes
-        const priorityFields = ['output', 'text', 'reply', 'message', 'response', 'content', 'json'];
+        // Prioridad de campos comunes que n8n y otros agentes suelen usar
+        const priorityFields = [
+          'output', 'text', 'reply', 'message', 'response', 'content',
+          'json', 'data', 'msg', 'answer', 'fulfillmentText', 'res'
+        ];
+
         for (const field of priorityFields) {
           if (obj[field]) {
             const found = findMessage(obj[field]);
             if (found) return found;
           }
         }
+
+        // Si es un objeto pero no encontramos campos conocidos, 
+        // revisamos si tiene alguna propiedad que sea string
+        for (const key in obj) {
+          if (typeof obj[key] === 'string' && obj[key].length > 0) {
+            return obj[key];
+          }
+        }
+
         return null;
       }
 
       botReply = findMessage(data);
 
       if (!botReply) {
-        botReply = "Recibí una respuesta pero el formato no es reconocido. Datos: " + JSON.stringify(data).substring(0, 100);
+        console.warn("Could not find message in response:", data);
+        botReply = "Recibí una respuesta pero el formato no es reconocido. Datos: " + JSON.stringify(data).substring(0, 150);
       }
 
       msgBox.innerHTML += `<div class="msg botMsg">${botReply}</div>`;
     } catch (err) {
       if (msgBox.contains(typingMsg)) msgBox.removeChild(typingMsg);
       console.error("Error fetching chatbot response:", err);
-      msgBox.innerHTML += `<div class="msg botMsg"><b>Error:</b> No se pudo conectar con el agente. Verifica que n8n esté activo y acepte peticiones en ${window.CHATBOT_ENDPOINT}</div>`;
+      msgBox.innerHTML += `<div class="msg botMsg"><b>Error:</b> No se pudo conectar con el agente. Verifica que n8n esté activo. <br><small>${err.message}</small></div>`;
     }
 
     msgBox.scrollTop = msgBox.scrollHeight;
