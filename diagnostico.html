@@ -11,306 +11,273 @@
         rel="stylesheet">
     <link rel="icon" type="image/png" href="faviconorderflow.png">
     <style>
+        /* Base page style overrides for premium feel */
+        body {
+            background-color: #0b1015;
+            background-image: radial-gradient(circle at 50% 0%, #1c2a38 0%, #0b1015 60%);
+            min-height: 100vh;
+        }
+
+        .hero {
+            position: relative;
+            z-index: 10;
+        }
+
         .diagnostic-card {
-            background: #2a2a2a;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(30, 36, 44, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
             max-width: 800px;
             margin: 0 auto;
-            border: 1px solid #444;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .progress-container {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .progress-bar {
-            height: 6px;
-            background: #444;
-            border-radius: 3px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
             overflow: hidden;
             width: 100%;
         }
 
         .progress-fill {
             height: 100%;
-            background: #47a2e8;
+            background: linear-gradient(90deg, #47a2e8, #00d2ff);
             width: 0%;
-            transition: width 0.5s ease;
+            transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 0 10px rgba(71, 162, 232, 0.5);
         }
 
         .question-container {
-            min-height: 320px;
+            min-height: 350px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
         }
 
-        .loading-spinner {
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-left-color: #47a2e8;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
         .question-title {
-            font-size: 1.4rem;
-            font-weight: 600;
+            font-size: 1.8rem;
+            font-weight: 700;
             color: #fff;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             font-family: 'Inter', sans-serif;
+            letter-spacing: -0.02em;
         }
 
         .question-subtitle {
-            color: #aaa;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
+            color: #b0bec5;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+            line-height: 1.5;
         }
 
+        /* Option Buttons */
         .option-btn {
-            display: block;
+            display: flex;
+            align-items: center;
             width: 100%;
-            padding: 15px 20px;
-            margin-bottom: 12px;
-            background: #3a3a3a;
-            border: 2px solid #555;
-            border-radius: 10px;
-            color: #fff;
-            font-size: 1rem;
+            padding: 18px 24px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #e0e0e0;
+            font-size: 1.1rem;
             text-align: left;
             cursor: pointer;
             transition: all 0.2s ease;
             font-family: 'Inter', sans-serif;
+            font-weight: 500;
         }
 
         .option-btn:hover {
             border-color: #47a2e8;
-            background: #444;
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(4px);
         }
 
         .option-btn.selected {
             border-color: #47a2e8;
             background: rgba(71, 162, 232, 0.15);
+            color: #fff;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(71, 162, 232, 0.1);
         }
 
-        .option-btn .emoji {
-            margin-right: 10px;
-        }
-
+        /* Inputs */
         .text-input,
         .textarea-input {
             width: 100%;
-            padding: 15px;
-            background: #3a3a3a;
-            border: 2px solid #555;
-            border-radius: 10px;
+            padding: 18px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
             color: #fff;
-            font-size: 1rem;
-            margin-top: 12px;
+            font-size: 1.05rem;
+            margin-top: 15px;
             font-family: 'Inter', sans-serif;
             box-sizing: border-box;
+            transition: border-color 0.3s, background 0.3s;
         }
 
         .textarea-input {
-            min-height: 100px;
+            min-height: 120px;
             resize: vertical;
+            line-height: 1.6;
         }
 
         .text-input:focus,
         .textarea-input:focus {
             outline: none;
             border-color: #47a2e8;
+            background: rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 0 4px rgba(71, 162, 232, 0.1);
         }
 
         .text-input::placeholder,
         .textarea-input::placeholder {
-            color: #888;
+            color: rgba(255, 255, 255, 0.3);
         }
 
+        /* Navigation Buttons */
         .nav-buttons {
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
-            gap: 15px;
+            margin-top: 50px;
+            gap: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 30px;
         }
 
         .nav-btn {
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-size: 1rem;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 1.05rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
+            border: none;
         }
 
         .nav-btn.back {
             background: transparent;
-            border: 2px solid #555;
-            color: #aaa;
+            color: #8899a6;
+            padding-left: 0;
         }
 
         .nav-btn.back:hover {
-            border-color: #888;
             color: #fff;
+            transform: translateX(-4px);
         }
 
         .nav-btn.next {
-            background: #47a2e8;
-            border: 2px solid #47a2e8;
+            background: linear-gradient(135deg, #47a2e8 0%, #0078d4 100%);
             color: #fff;
-            flex: 1;
-            max-width: 200px;
+            box-shadow: 0 4px 15px rgba(71, 162, 232, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .nav-btn.next:hover {
-            background: #3a8ed0;
-        }
-
-        .nav-btn.next:disabled {
-            background: #555;
-            border-color: #555;
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-
-        .contact-field {
-            margin-bottom: 20px;
-        }
-
-        .contact-field label {
-            display: block;
-            margin-bottom: 8px;
-            color: #ccc;
-            font-weight: 500;
-        }
-
-        .contact-field input {
-            width: 100%;
-            padding: 12px 15px;
-            background: #3a3a3a;
-            border: 2px solid #555;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 1rem;
-            box-sizing: border-box;
-        }
-
-        .contact-field input:focus {
-            outline: none;
-            border-color: #47a2e8;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: #47a2e8;
-            border: none;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background: #3a8ed0;
-        }
-
-        .submit-btn:disabled {
-            background: #555;
-            cursor: not-allowed;
-        }
-
-        .success-message {
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .success-message h2 {
-            color: #2ecc71;
-            margin-bottom: 15px;
-        }
-
-        .success-message p {
-            color: #ccc;
-            font-size: 1.1rem;
-        }
-
-        .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            background: #3a3a3a;
-            border: 2px solid #555;
-            border-radius: 8px;
-            padding: 10px 15px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .checkbox-item:hover {
-            border-color: #47a2e8;
-        }
-
-        .checkbox-item.selected {
-            border-color: #47a2e8;
-            background: rgba(71, 162, 232, 0.15);
-        }
-
-        .checkbox-item input {
-            display: none;
-        }
-
-        .checkbox-item span {
-            color: #fff;
-            font-size: 0.95rem;
-        }
-
-        .privacy-note {
-            background: rgba(71, 162, 232, 0.1);
-            border: 1px solid rgba(71, 162, 232, 0.3);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            color: #aaa;
-            font-size: 0.9rem;
-        }
-
-        .section-divider {
-            border-top: 1px solid #444;
-            margin: 25px 0;
-            padding-top: 20px;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(71, 162, 232, 0.4);
         }
 
         .section-label {
             color: #47a2e8;
-            font-size: 0.85rem;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        /* Contact Fields */
+        .contact-field {
+            margin-bottom: 25px;
+        }
+
+        .contact-field label {
+            display: block;
+            margin-bottom: 10px;
+            color: #ccc;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .contact-field input {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px;
+            border-radius: 12px;
+            color: white;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .contact-field input:focus {
+            border-color: #47a2e8;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(71, 162, 232, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #0078d4 0%, #00c6eb 100%);
+            border: none;
+            border-radius: 60px;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 120, 212, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 120, 212, 0.5);
+        }
+
+        .privacy-note {
+            background: rgba(71, 162, 232, 0.08);
+            border: 1px solid rgba(71, 162, 232, 0.2);
+            color: #a0c4e8;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #47a2e8;
+            width: 50px;
+            height: 50px;
         }
     </style>
 </head>
@@ -331,12 +298,13 @@
     </header>
 
     <main>
-        <section class="hero" style="text-align:center; padding: 60px 20px 40px;">
-            <h1 style="font-family: 'Inter', sans-serif; margin-bottom: 15px; color: #fff;">Diagnóstico Inteligente de
-                Procesos</h1>
-            <p style="max-width: 600px; margin: 0 auto; line-height: 1.6; font-size: 1.1rem; color: #ccc;">
-                Responde a unas preguntas rápidas para entender cómo funciona tu empresa y detectar oportunidades de
-                automatización.
+        <section class="hero" style="text-align:center; padding: 40px 20px 20px;">
+            <h1
+                style="font-family: 'Inter', sans-serif; margin-bottom: 15px; font-size: 2.5rem; background: linear-gradient(135deg, white 0%, #a5b4fc 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800;">
+                Diagnóstico de Procesos
+            </h1>
+            <p style="max-width: 600px; margin: 0 auto; line-height: 1.6; font-size: 1.15rem; color: #b0b0b0;">
+                Responde unas preguntas para detectar oportunidades de automatización.
             </p>
         </section>
 
@@ -700,14 +668,7 @@
                 if (response.ok) {
                     progressFill.style.width = '100%';
                     progressText.textContent = '100%';
-                    container.innerHTML = `
-                        <div class="success-message">
-                            <h2>✓ ¡Diagnóstico enviado!</h2>
-                            <p>Hemos recibido tu información correctamente.</p>
-                            <p style="margin-top: 15px;">Analizaremos tus respuestas por bloques y te contactaremos pronto.</p>
-                            <a href="index.html" style="display: inline-block; margin-top: 30px; color: #47a2e8; text-decoration: underline;">Volver al inicio</a>
-                        </div>
-                    `;
+                    window.location.href = 'confirmacion-diagnostico.html';
                 } else {
                     throw new Error('Error en el servidor');
                 }

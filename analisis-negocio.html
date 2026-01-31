@@ -33,13 +33,14 @@
 
     <main>
         <section class="hero" style="text-align:center; padding: 60px 20px;">
-            <h1 style="font-family: 'Inter', sans-serif; margin-bottom: 20px; color: #fff;">Diagnóstico Inteligente del
-                Negocio
+            <h1 style="font-family: 'Inter', sans-serif; margin-bottom: 20px; color: #fff;">Formulario de Diagnóstico
             </h1>
             <p style="max-width: 700px; margin: 0 auto; line-height: 1.6; font-size: 1.2rem;">
-                Realizamos un diagnóstico inteligente para entender cómo funciona tu negocio por dentro. Analizamos tus
-                procesos, detectamos cuellos de botella y oportunidades de automatización, y te devolvemos una visión
-                clara de mejora.
+                Este formulario nos permite obtener un <strong>contexto inicial</strong> sobre tu negocio <strong>antes
+                    de la reunión de
+                    diagnóstico</strong>.
+                A través de tus respuestas entendemos cómo funciona tu empresa, para preparar un diagnóstico posterior
+                adaptado a tu caso.
             </p>
             <div class="highlight-badge">
                 Sin compromiso <span class="separator"></span> Gratis
@@ -52,27 +53,22 @@
                 </h2>
                 <ul style="list-style: none; padding: 0;">
                     <li style="margin-bottom: 15px; display: flex; align-items: start;">
-                        <span style="color: #47a2e8; margin-right: 10px;">✓</span> Entender cómo gestionas tu
-                        negocio
+                        <span style="color: #47a2e8; margin-right: 10px;">✓</span> Entender cómo funciona tu negocio en
+                        general
                     </li>
                     <li style="margin-bottom: 15px; display: flex; align-items: start;">
-                        <span style="color: #47a2e8; margin-right: 10px;">✓</span> Detectar tareas repetitivas y puntos
-                        de fricción
+                        <span style="color: #47a2e8; margin-right: 10px;">✓</span> Tener un contexto previo antes de la
+                        reunión
                     </li>
                     <li style="margin-bottom: 15px; display: flex; align-items: start;">
-                        <span style="color: #47a2e8; margin-right: 10px;">✓</span> Ver qué procesos se pueden
-                        automatizar
-                    </li>
-                    <li style="margin-bottom: 15px; display: flex; align-items: start;">
-                        <span style="color: #47a2e8; margin-right: 10px;">✓</span> Proponer soluciones prácticas
-                        adaptadas a tu negocio
+                        <span style="color: #47a2e8; margin-right: 10px;">✓</span> Preparar un diagnóstico más preciso y
+                        adaptado
                     </li>
                 </ul>
             </div>
 
-            <div style="text-align: center; margin-bottom: 60px;">
-                <a href="diagnostico.html" class="cta-button"
-                    style="display: inline-block; background-color: #47a2e8; color: white; padding: 15px 40px; border-radius: 8px; font-weight: bold; font-size: 1.2rem; text-decoration: none; transition: background 0.3s ease;">
+            <div style="text-align: center; margin-bottom: 60px;" id="static-cta">
+                <a href="diagnostico.html" class="cta-button premium-cta">
                     Iniciar diagnóstico
                 </a>
                 <p
@@ -80,6 +76,13 @@
                     En función de tus respuestas, analizaremos si existen oportunidades reales de mejora.
                     Solo te contactaremos si vemos un encaje claro.
                 </p>
+            </div>
+
+            <!-- Floating CTA Duplicate -->
+            <div class="floating-schedule-box" id="floating-cta">
+                <a href="diagnostico.html" class="cta-button premium-cta">
+                    Iniciar diagnóstico
+                </a>
             </div>
         </section>
     </main>
@@ -345,6 +348,83 @@
             background: #333;
             text-decoration: line-through;
         }
+
+        /* Premium CTA Button Style - Copied from Confirmation Page */
+        .premium-cta {
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            background: linear-gradient(135deg, #0078d4 0%, #00c6eb 100%) !important;
+            color: white !important;
+            text-decoration: none;
+            padding: 22px 48px !important;
+            border-radius: 60px !important;
+            font-size: 1.35rem !important;
+            font-weight: 800 !important;
+            letter-spacing: 0.5px;
+            box-shadow: 0 10px 40px rgba(0, 120, 212, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .premium-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .premium-cta:hover::before {
+            left: 100%;
+        }
+
+        .premium-cta:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 120, 212, 0.6);
+            background: linear-gradient(135deg, #0078d4 0%, #00c6eb 100%) !important;
+            /* Keep gradient on hover */
+        }
+
+        /* Floating CTA Styles */
+        .floating-schedule-box {
+            position: fixed;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 1000;
+            margin: 0;
+            padding: 0 20px;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.5s ease-out;
+        }
+
+        .floating-schedule-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .floating-schedule-box .premium-cta {
+            pointer-events: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 10px 20px rgba(0, 120, 212, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .floating-schedule-box .premium-cta {
+                width: 100%;
+                padding: 18px !important;
+                font-size: 1.1rem !important;
+            }
+        }
     </style>
 
 
@@ -352,6 +432,44 @@
         window.CHATBOT_ENDPOINT = "http://localhost:5678/webhook/3381e020-7a56-4240-a876-1a837682a5eb";
     </script>
     <script src="./chat-widget.js"></script>
+    <script>
+        // Logic to toggle floating CTA visibility based on static CTA position
+        document.addEventListener('DOMContentLoaded', () => {
+            const staticCta = document.getElementById('static-cta');
+            const floatingCta = document.getElementById('floating-cta');
+
+            // Initially check position
+            const checkVisibility = () => {
+                const rect = staticCta.getBoundingClientRect();
+                if (rect.top > window.innerHeight) {
+                    floatingCta.classList.add('visible');
+                } else {
+                    floatingCta.classList.remove('visible');
+                }
+            };
+
+            // Initial check after a small delay
+            setTimeout(checkVisibility, 500);
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        floatingCta.classList.remove('visible');
+                    } else {
+                        const rect = staticCta.getBoundingClientRect();
+                        if (rect.top > window.innerHeight) {
+                            floatingCta.classList.add('visible');
+                        }
+                    }
+                });
+            }, {
+                root: null,
+                threshold: 0
+            });
+
+            observer.observe(staticCta);
+        });
+    </script>
 </body>
 
 </html>
