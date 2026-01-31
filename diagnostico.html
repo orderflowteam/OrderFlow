@@ -457,452 +457,246 @@
 
     <script>
         // =============================================
-        // DIAGNOSTIC FLOW SYSTEM - COMPLETE VERSION
+        // DIAGNOSTIC FLOW SYSTEM - SIMPLIFIED VERSION
         // =============================================
 
         let currentStep = 0;
         let answers = {};
-        let questionFlow = [];
+        const questionFlow = [
+            'tipo_negocio',
+            'ventas',
+            'marketing',
+            'operaciones',
+            'administracion',
+            'pregunta_final',
+            'datos_contacto'
+        ];
 
         const container = document.getElementById('diagnostic-container');
         const progressFill = document.getElementById('progress-fill');
         const progressText = document.getElementById('progress-text');
 
-        // Sectores
-        const SECTORES = {
-            RESTAURANTE: 'restaurante',
-            ECOMMERCE: 'ecommerce',
-            SERVICIOS: 'servicios',
-            OTRO: 'otro'
-        };
-
-        // Areas
-        const AREAS = {
-            VENTAS: 'ventas',
-            MARKETING: 'marketing',
-            OPERACIONES: 'operaciones',
-            ADMINISTRACION: 'administracion'
-        };
-
-        // Preguntas por sector y área
-        const PREGUNTAS_VENTAS = {
-            [SECTORES.RESTAURANTE]: [
-                { id: 'v_canales', q: '¿Por qué canales entran actualmente los pedidos?', type: 'multi', opts: ['Sala', 'Teléfono', 'WhatsApp', 'Plataformas externas (Uber, Glovo, etc.)'] },
-                { id: 'v_perdidos', q: '¿Se pierden pedidos por falta de respuesta?', type: 'single', opts: ['Sí, con frecuencia', 'A veces', 'No', 'No lo sé'] },
-                { id: 'v_registro', q: '¿Cómo se registran los pedidos?', type: 'multi', opts: ['Manual', 'TPV'] }
-            ],
-            [SECTORES.ECOMMERCE]: [
-                { id: 'v_plataforma', q: '¿Qué plataforma utilizas para vender?', type: 'single', opts: ['Shopify', 'WooCommerce', 'Otra'] },
-                { id: 'v_perdidas', q: '¿Dónde se pierden más ventas?', type: 'single', opts: ['Carritos abandonados', 'Falta de repetición de clientes', 'Atención al cliente', 'No lo sé'] },
-                { id: 'v_horario', q: '¿Respondes a clientes fuera de horario laboral?', type: 'single', opts: ['Sí', 'No'] }
-            ],
-            [SECTORES.SERVICIOS]: [
-                { id: 'v_leads', q: '¿Cómo entran los leads?', type: 'multi', opts: ['WhatsApp', 'Web', 'Redes', 'Referidos'] },
-                { id: 'v_seguimiento', q: '¿Pierdes leads por falta de seguimiento?', type: 'single', opts: ['Sí', 'No', 'No lo sé'] },
-                { id: 'v_respuesta', q: '¿Respondes siempre rápido a los clientes?', type: 'single', opts: ['Sí', 'A veces', 'No'] }
-            ],
-            [SECTORES.OTRO]: [
-                { id: 'v_ingresos', q: '¿Cómo generan ingresos principalmente?', type: 'multi', opts: ['Servicios', 'Productos físicos', 'Productos digitales'] },
-                { id: 'v_clientes', q: '¿Cómo llegan normalmente los clientes?', type: 'multi', opts: ['Recomendaciones', 'Web', 'Redes', 'WhatsApp', 'Otra'] }
-            ]
-        };
-
-        const PREGUNTAS_MARKETING = {
-            [SECTORES.RESTAURANTE]: [
-                { id: 'm_resenas', q: '¿Pides reseñas a tus clientes?', type: 'conditional', opts: ['No', 'Sí'], subQ: { trigger: 'Sí', id: 'm_resenas_tipo', q: '¿Cómo las pides?', opts: ['Manual', 'Automático'] } },
-                { id: 'm_bbdd', q: '¿Tienes base de datos de clientes?', type: 'single', opts: ['No', 'Sí, pero no la uso', 'Sí, y la uso para promociones'] },
-                { id: 'm_retorno', q: '¿Realizas acciones para que los clientes vuelvan?', type: 'single', opts: ['No', 'Sí, manual', 'Sí, automatizado'] }
-            ],
-            [SECTORES.ECOMMERCE]: [
-                { id: 'm_postcompra', q: '¿Tienes automatizaciones post-compra?', type: 'single', opts: ['No', 'Básicas', 'Avanzadas'] },
-                { id: 'm_canales', q: '¿Usas email o WhatsApp para marketing?', type: 'single', opts: ['No', 'Sí, manual', 'Sí, automatizado'] },
-                { id: 'm_segmenta', q: '¿Segmentas a tus clientes para promociones?', type: 'single', opts: ['No', 'Parcial', 'Sí'] }
-            ],
-            [SECTORES.SERVICIOS]: [
-                { id: 'm_autofollow', q: '¿Tienes seguimiento de leads?', type: 'conditional', opts: ['No', 'Sí'], subQ: { trigger: 'Sí', id: 'm_autofollow_tipo', q: '¿Cómo lo haces?', opts: ['Manual', 'Automático'] } },
-                { id: 'm_nurture', q: '¿Nutres a los leads que no compran de inmediato?', type: 'conditional', opts: ['No', 'Sí'], subQ: { trigger: 'Sí', id: 'm_nurture_tipo', q: '¿Cómo lo haces?', opts: ['Manual', 'Automático'] } }
-            ],
-            [SECTORES.OTRO]: [
-                { id: 'm_bbdd', q: '¿Tienes base de datos de clientes/leads?', type: 'single', opts: ['Sí', 'No', 'Parcial'] },
-                { id: 'm_retencion', q: '¿Realizas acciones para retener clientes o generar repetición?', type: 'single', opts: ['No', 'Sí, manual', 'Sí, automatizado'] },
-                { id: 'm_metricas', q: '¿Mides el impacto de tus acciones de marketing?', type: 'single', opts: ['No', 'Sí, parcialmente', 'Sí'] }
-            ]
-        };
-
-        const PREGUNTAS_OPS = {
-            [SECTORES.RESTAURANTE]: [
-                { id: 'o_reservas', q: '¿Cómo gestionas reservas y pedidos?', type: 'multi', opts: ['Manual', 'Herramienta'] },
-                { id: 'o_problemas', q: '¿Qué problemas operativos son más comunes?', type: 'multi', opts: ['Retrasos', 'Pedidos mal apuntados', 'Falta de seguimiento', 'Ninguno'] }
-            ],
-            [SECTORES.ECOMMERCE]: [
-                { id: 'o_gestion', q: '¿Cómo gestionas pedidos, envíos y devoluciones?', type: 'single', opts: ['Manual', 'Semi-automático', 'Automatizado'] },
-                { id: 'o_avisos', q: '¿Tienes avisos automáticos de incidencias?', type: 'single', opts: ['Sí', 'No'] }
-            ],
-            [SECTORES.SERVICIOS]: [
-                { id: 'o_citas', q: '¿Cómo gestionas citas o proyectos?', type: 'multi', opts: ['Manual', 'Software'] },
-                { id: 'o_recordatorios', q: '¿Existen recordatorios automáticos?', type: 'single', opts: ['Sí', 'No'] },
-                { id: 'o_olvidos', q: '¿Cuántas citas se pierden por olvidos?', type: 'single', opts: ['Muchas', 'Algunas', 'Ninguna'] }
-            ],
-            [SECTORES.OTRO]: [
-                { id: 'o_entrega', q: '¿Cómo se gestiona actualmente el servicio o entrega?', type: 'single', opts: ['Manual', 'Semi-automático', 'Automatizado'] },
-                { id: 'o_tareas', q: '¿Hay tareas repetitivas hechas manualmente?', type: 'single', opts: ['Sí', 'No'] },
-                { id: 'o_errores', q: '¿Existen errores frecuentes por falta de proceso?', type: 'single', opts: ['Sí', 'No'] }
-            ]
-        };
-
-        const PREGUNTAS_ADMIN = {
-            [SECTORES.RESTAURANTE]: [
-                { id: 'a_facturacion', q: '¿Cómo gestionas facturación y cierres?', type: 'single', opts: ['Manual', 'Software', 'Asesoría externa'] },
-                { id: 'a_visibilidad', q: '¿Tienes visibilidad de ventas diarias, pedidos por canal y reseñas negativas?', type: 'single', opts: ['Sí', 'Parcial', 'No'] }
-            ],
-            [SECTORES.ECOMMERCE]: [
-                { id: 'a_factura_auto', q: '¿Facturación automática?', type: 'single', opts: ['Sí', 'No'] },
-                { id: 'a_metricas', q: '¿Tienes métricas claras del negocio?', type: 'single', opts: ['Sí', 'Parcial', 'No'] }
-            ],
-            [SECTORES.SERVICIOS]: [
-                { id: 'a_cobros', q: '¿Cómo gestionas cobros y facturación?', type: 'single', opts: ['Manual', 'Herramienta', 'Asesoría'] },
-                { id: 'a_control', q: '¿Tienes control claro del estado de cada cliente?', type: 'single', opts: ['Sí', 'No'] }
-            ],
-            [SECTORES.OTRO]: [
-                { id: 'a_gestion', q: '¿Cómo llevas la facturación, cobros y métricas?', type: 'single', opts: ['Manual', 'Herramienta', 'Parcialmente automatizado'] }
-            ]
-        };
-
-        const DETALLE_AREA = {
-            [AREAS.VENTAS]: { q: '¿Cuál es el mayor reto de tus ventas actualmente?', hint: '(pérdida de clientes, seguimiento, cierre, canales, etc.)' },
-            [AREAS.MARKETING]: { q: '¿Qué aspecto de tu marketing te gustaría mejorar primero?', hint: '(captación, fidelización, automatización, métricas, etc.)' },
-            [AREAS.OPERACIONES]: { q: '¿Cuál es la parte más complicada de entregar tu servicio o producto?', hint: '(errores, retrasos, tareas repetitivas, coordinación, etc.)' },
-            [AREAS.ADMINISTRACION]: { q: '¿Qué te quita más tiempo o genera más errores en tu gestión administrativa?', hint: '(facturas, métricas, reportes, cobros, etc.)' }
+        const QUESTIONS_CONFIG = {
+            tipo_negocio: {
+                label: '1. Tipo de negocio',
+                title: '¿Qué tipo de negocio tienes?',
+                type: 'options',
+                opts: ['Restaurante / Hostelería', 'E-commerce', 'Servicios profesionales (clínicas, peluquerías, agencias…)', 'Otro / Modelo diferente'],
+                otherPlaceholder: 'Especifica tu modelo de negocio...'
+            },
+            ventas: {
+                label: '2. Ventas',
+                title: 'Háblanos de tus ventas y captación',
+                type: 'multi-textarea',
+                questions: [
+                    { id: 'v_captacion', title: '¿Cómo llegan normalmente los clientes o pedidos a tu negocio?', placeholder: 'Describe tus canales de entrada...' },
+                    { id: 'v_proceso', title: '¿Qué ocurre desde que un cliente muestra interés hasta que compra o recibe el servicio?', placeholder: 'Describe el proceso paso a paso...' },
+                    { id: 'v_problemas', title: '¿Qué problemas o dificultades ocurren durante este proceso?', placeholder: 'Menciona los obstáculos principales...' }
+                ]
+            },
+            marketing: {
+                label: '3. Marketing',
+                title: 'Háblanos de tu marketing y visibilidad',
+                type: 'multi-textarea',
+                questions: [
+                    { id: 'm_canales', title: '¿Cómo das a conocer tu negocio a posibles clientes?', placeholder: 'Describe tus acciones para atraer visibilidad...' },
+                    { id: 'm_atraccion', title: '¿Qué ocurre cuando intentas atraer o mantener clientes?', placeholder: 'Explica cómo gestionas la captación...' },
+                    { id: 'm_dificultades', title: '¿Qué dificultades o inconvenientes sueles encontrar?', placeholder: 'Describe qué es lo que más te cuesta...' }
+                ]
+            },
+            operaciones: {
+                label: '4. Operaciones / Fulfillment',
+                title: 'Háblanos de tus operaciones y entrega',
+                type: 'multi-textarea',
+                questions: [
+                    { id: 'o_entrega', title: '¿Cómo se realizan las operaciones o la entrega de productos o servicios?', placeholder: 'Explica el funcionamiento interno...' },
+                    { id: 'o_incidencias', title: '¿Qué problemas, retrasos o incidencias ocurren con frecuencia?', placeholder: 'Menciona los fallos más comunes...' },
+                    { id: 'o_repetitivo', title: '¿Qué tareas o pasos son repetitivos o complicados?', placeholder: 'Identifica las tareas que roban tiempo...' }
+                ]
+            },
+            administracion: {
+                label: '5. Administración / Gestión interna',
+                title: 'Háblanos de tu gestión interna',
+                type: 'multi-textarea',
+                questions: [
+                    { id: 'a_control', title: '¿Cómo gestionas la información y control interno de tu negocio?', placeholder: 'Hojas de cálculo, software, manual...' },
+                    { id: 'a_errores', title: '¿Qué dificultades o errores ocurren frecuentemente en la gestión interna?', placeholder: 'Errores en datos, facturación, coordinación...' },
+                    { id: 'a_complicaciones', title: '¿Qué aspectos internos te generan más complicaciones o pérdidas de tiempo?', placeholder: '¿Qué es lo que más te gustaría simplificar?' }
+                ]
+            },
+            pregunta_final: {
+                label: '6. Pregunta Final',
+                title: '¿Algo más que debamos saber?',
+                description: 'Cualquier otra cosa que consideres importante que sepamos antes de la llamada.',
+                type: 'textarea',
+                id: 'final_abierta',
+                placeholder: 'Tu respuesta aquí...'
+            }
         };
 
         function updateProgress() {
-            const totalSteps = questionFlow.length;
-            const progress = totalSteps > 0 ? Math.round((currentStep / totalSteps) * 100) : 0;
+            const progress = Math.round((currentStep / (questionFlow.length - 1)) * 100);
             progressFill.style.width = `${progress}%`;
             progressText.textContent = `${progress}%`;
-        }
-
-        function buildQuestionFlow() {
-            questionFlow = ['sector', 'prioridad', 'detalle_prioridad'];
-            const sector = answers.sector;
-            const prioridad = answers.prioridad;
-
-            // Orden de áreas: primero la prioritaria, luego las demás
-            const areasOrden = [prioridad];
-            Object.values(AREAS).forEach(a => { if (a !== prioridad) areasOrden.push(a); });
-
-            areasOrden.forEach(area => {
-                questionFlow.push(`area_${area}`);
-            });
-
-            questionFlow.push('pregunta_final', 'contacto');
-        }
-
-        function getAreaQuestions(area, sector) {
-            switch (area) {
-                case AREAS.VENTAS: return PREGUNTAS_VENTAS[sector] || [];
-                case AREAS.MARKETING: return PREGUNTAS_MARKETING[sector] || [];
-                case AREAS.OPERACIONES: return PREGUNTAS_OPS[sector] || [];
-                case AREAS.ADMINISTRACION: return PREGUNTAS_ADMIN[sector] || [];
-                default: return [];
-            }
         }
 
         function renderStep() {
             updateProgress();
             const stepId = questionFlow[currentStep];
 
-            if (stepId === 'sector') renderSector();
-            else if (stepId === 'prioridad') renderPrioridad();
-            else if (stepId === 'detalle_prioridad') renderDetallePrioridad();
-            else if (stepId.startsWith('area_')) renderAreaQuestions(stepId.replace('area_', ''));
-            else if (stepId === 'pregunta_final') renderPreguntaFinal();
-            else if (stepId === 'contacto') renderContacto();
-        }
+            if (stepId === 'datos_contacto') {
+                renderContacto();
+                return;
+            }
 
-        function renderSector() {
-            container.innerHTML = `
-                <p class="section-label">Sector del negocio</p>
-                <h3 class="question-title">¿Qué tipo de empresa tienes?</h3>
-                <div class="options-container">
-                    <button class="option-btn" data-value="${SECTORES.RESTAURANTE}">Restaurante / Hostelería</button>
-                    <button class="option-btn" data-value="${SECTORES.ECOMMERCE}">E-commerce</button>
-                    <button class="option-btn" data-value="${SECTORES.SERVICIOS}">Servicios profesionales (clínica, peluquería, gimnasios...)</button>
-                    <button class="option-btn" data-value="${SECTORES.OTRO}">Otro</button>
-                </div>
-                <input type="text" class="text-input" id="other-input" placeholder="Especifica tu tipo de empresa..." style="display:none; margin-top: 20px;">
-                <div class="nav-buttons"><div></div><button class="nav-btn next" id="btn-next" disabled>Siguiente →</button></div>
+            const config = QUESTIONS_CONFIG[stepId];
+            let html = `
+                <p class="section-label">${config.label}</p>
+                <h3 class="question-title" style="margin-bottom: 30px;">${config.title}</h3>
+                ${config.description ? `<p class="question-subtitle" style="margin-top: -20px; margin-bottom: 25px; color: #aaa; font-size: 0.95rem;">${config.description}</p>` : ''}
             `;
 
-            const otherInput = document.getElementById('other-input');
-            const nextBtn = document.getElementById('btn-next');
-
-            document.querySelectorAll('.option-btn').forEach(btn => {
-                btn.onclick = () => {
-                    document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-                    btn.classList.add('selected');
-                    answers.sector = btn.dataset.value;
-
-                    if (btn.dataset.value === SECTORES.OTRO) {
-                        otherInput.style.display = 'block';
-                        otherInput.focus();
-                        nextBtn.disabled = !otherInput.value.trim();
-                    } else {
-                        otherInput.style.display = 'none';
-                        nextBtn.disabled = false;
-                    }
-                };
-            });
-
-            otherInput.oninput = () => {
-                answers.sector_detalle = otherInput.value.trim();
-                nextBtn.disabled = !otherInput.value.trim();
-            };
-
-            nextBtn.onclick = () => {
-                currentStep++;
-                renderStep();
-            };
-        }
-
-        function renderPrioridad() {
-            container.innerHTML = `
-                <p class="section-label">Bloque de prioridad</p>
-                <h3 class="question-title">¿Qué área te gustaría priorizar para mejorar primero?</h3>
-                <div class="options-container">
-                    <button class="option-btn" data-value="${AREAS.VENTAS}">Ventas</button>
-                    <button class="option-btn" data-value="${AREAS.MARKETING}">Marketing</button>
-                    <button class="option-btn" data-value="${AREAS.OPERACIONES}">Operaciones / Fulfillment</button>
-                    <button class="option-btn" data-value="${AREAS.ADMINISTRACION}">Administración</button>
-                </div>
-                <div class="nav-buttons"><button class="nav-btn back" id="btn-back">← Atrás</button><button class="nav-btn next" id="btn-next" disabled>Siguiente →</button></div>
-            `;
-            setupSingleSelect('prioridad');
-            document.getElementById('btn-back').onclick = () => { currentStep--; renderStep(); };
-        }
-
-        function renderDetallePrioridad() {
-            const prioridad = answers.prioridad;
-            const info = DETALLE_AREA[prioridad];
-            container.innerHTML = `
-                <p class="section-label">Detalle de ${prioridad}</p>
-                <h3 class="question-title">${info.q}</h3>
-                <p class="question-subtitle">${info.hint}</p>
-                <textarea class="textarea-input" id="detalle-input" placeholder="Describe tu situación..."></textarea>
-                <div class="nav-buttons"><button class="nav-btn back" id="btn-back">← Atrás</button><button class="nav-btn next" id="btn-next">Siguiente →</button></div>
-            `;
-            document.getElementById('btn-back').onclick = () => { currentStep--; renderStep(); };
-            document.getElementById('btn-next').onclick = () => {
-                const detalle = document.getElementById('detalle-input').value.trim();
-                if (!detalle) {
-                    alert('Por favor, describe tu situación antes de continuar.');
-                    return;
-                }
-                answers.detalle_prioridad = detalle;
-                buildQuestionFlow();
-                currentStep++;
-                renderStep();
-            };
-        }
-
-        function renderAreaQuestions(area) {
-            const sector = answers.sector;
-            const preguntas = getAreaQuestions(area, sector);
-            const areaNames = { ventas: 'Ventas', marketing: 'Marketing', operaciones: 'Operaciones / Fulfillment', administracion: 'Administración' };
-
-            if (!answers.areas) answers.areas = {};
-            if (!answers.areas[area]) answers.areas[area] = {};
-
-            let html = `<p class="section-label">${areaNames[area]}</p>`;
-
-            preguntas.forEach((p, i) => {
-                html += `<div class="section-divider"><h3 class="question-title">${p.q}</h3>`;
-                if (p.type === 'single') {
-                    html += `<div class="options-container" data-qid="${p.id}" data-type="single">`;
-                    p.opts.forEach(opt => {
-                        html += `<button class="option-btn area-opt" data-qid="${p.id}" data-value="${opt}">${opt}</button>`;
-                    });
-                    html += `</div>`;
-                } else if (p.type === 'conditional') {
-                    html += `<div class="options-container" data-qid="${p.id}" data-type="conditional" data-trigger="${p.subQ.trigger}">`;
-                    p.opts.forEach(opt => {
-                        html += `<button class="option-btn area-opt conditional-main" data-qid="${p.id}" data-value="${opt}">${opt}</button>`;
-                    });
-                    html += `</div>`;
-                    html += `<div class="sub-question" id="sub-${p.id}" style="display:none; margin-top:15px; padding-left:20px; border-left:3px solid #47a2e8;">`;
-                    html += `<h4 style="color:#ccc; margin-bottom:10px;">${p.subQ.q}</h4>`;
-                    html += `<div class="options-container" data-qid="${p.subQ.id}" data-type="single">`;
-                    p.subQ.opts.forEach(opt => {
-                        html += `<button class="option-btn area-opt sub-opt" data-qid="${p.subQ.id}" data-value="${opt}">${opt}</button>`;
-                    });
-                    html += `</div></div>`;
-                } else {
-                    html += `<div class="checkbox-group" data-qid="${p.id}" data-type="multi">`;
-                    p.opts.forEach(opt => {
-                        html += `<label class="checkbox-item" data-qid="${p.id}" data-value="${opt}"><input type="checkbox"><span>${opt}</span></label>`;
-                    });
-                    html += `</div>`;
-                }
+            if (config.type === 'options') {
+                html += `<div class="options-container">`;
+                config.opts.forEach(opt => {
+                    const selectedClass = answers[stepId] === opt ? 'selected' : '';
+                    html += `<button class="option-btn ${selectedClass}" data-value="${opt}">${opt}</button>`;
+                });
                 html += `</div>`;
-            });
 
-            html += `<div class="nav-buttons"><button class="nav-btn back" id="btn-back">← Atrás</button><button class="nav-btn next" id="btn-next">Siguiente →</button></div>`;
+                const otherPlaceholder = config.otherPlaceholder || 'Especifica...';
+                const isOtherShowing = answers[stepId] === 'Otro' || (answers[stepId] && !config.opts.includes(answers[stepId]));
+                const otherValue = isOtherShowing && answers[stepId] !== 'Otro' ? answers[stepId] : '';
+
+                html += `<input type="text" class="text-input" id="other-input" placeholder="${otherPlaceholder}" value="${otherValue}" style="${isOtherShowing ? 'display:block' : 'display:none'}; margin-top: 20px;">`;
+            } else if (config.type === 'multi-textarea') {
+                config.questions.forEach((q, idx) => {
+                    html += `
+                        <div class="question-item" style="margin-bottom: 25px; ${idx > 0 ? 'border-top: 1px solid #444; padding-top: 20px;' : ''}">
+                            <h4 style="color: #eee; margin-bottom: 12px; font-size: 1rem;">${q.title}</h4>
+                            <textarea class="textarea-input multi-input" data-qid="${q.id}" placeholder="${q.placeholder}" style="min-height: 80px;">${answers[q.id] || ''}</textarea>
+                        </div>
+                    `;
+                });
+            } else if (config.type === 'textarea') {
+                html += `
+                    <textarea class="textarea-input" id="step-input" placeholder="${config.placeholder}">${answers[config.id || stepId] || ''}</textarea>
+                `;
+            }
+
+            html += `
+                <div class="nav-buttons">
+                    <button class="nav-btn back" id="btn-back" ${currentStep === 0 ? 'style="visibility:hidden"' : ''}>← Atrás</button>
+                    <button class="nav-btn next" id="btn-next">Siguiente →</button>
+                </div>
+            `;
+
             container.innerHTML = html;
 
-            // Single select handlers (including conditional main options)
-            document.querySelectorAll('.area-opt:not(.sub-opt)').forEach(btn => {
-                btn.onclick = (e) => {
-                    e.preventDefault();
-                    const qid = btn.dataset.qid;
-                    document.querySelectorAll(`.area-opt[data-qid="${qid}"]:not(.sub-opt)`).forEach(b => b.classList.remove('selected'));
-                    btn.classList.add('selected');
-                    answers.areas[area][qid] = btn.dataset.value;
-
-                    // Handle conditional sub-question visibility
-                    const container = btn.closest('[data-type="conditional"]');
-                    if (container) {
-                        const trigger = container.dataset.trigger;
-                        const subQ = document.getElementById(`sub-${qid}`);
-                        if (subQ) {
-                            if (btn.dataset.value === trigger) {
-                                subQ.style.display = 'block';
-                            } else {
-                                subQ.style.display = 'none';
-                                // Clear sub-answer if hidden
-                                const subQid = subQ.querySelector('[data-qid]')?.dataset.qid;
-                                if (subQid) delete answers.areas[area][subQid];
-                                subQ.querySelectorAll('.sub-opt').forEach(b => b.classList.remove('selected'));
-                            }
+            // Event Listeners
+            if (config.type === 'options') {
+                const otherInput = document.getElementById('other-input');
+                document.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+                        btn.classList.add('selected');
+                        const val = btn.dataset.value;
+                        if (val.includes('Otro')) {
+                            otherInput.style.display = 'block';
+                            otherInput.focus();
+                            answers[stepId] = otherInput.value.trim();
+                        } else {
+                            otherInput.style.display = 'none';
+                            answers[stepId] = val;
                         }
-                    }
-                };
-            });
-
-            // Sub-option handlers
-            document.querySelectorAll('.sub-opt').forEach(btn => {
-                btn.onclick = (e) => {
-                    e.preventDefault();
-                    const qid = btn.dataset.qid;
-                    document.querySelectorAll(`.sub-opt[data-qid="${qid}"]`).forEach(b => b.classList.remove('selected'));
-                    btn.classList.add('selected');
-                    answers.areas[area][qid] = btn.dataset.value;
-                };
-            });
-
-            // Multi select handlers - Fixed
-            document.querySelectorAll('.checkbox-item').forEach(item => {
-                item.onclick = (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    item.classList.toggle('selected');
-                    const checkbox = item.querySelector('input[type="checkbox"]');
-                    if (checkbox) checkbox.checked = item.classList.contains('selected');
-                    const qid = item.dataset.qid;
-                    const selected = [...document.querySelectorAll(`.checkbox-item.selected[data-qid="${qid}"]`)].map(i => i.dataset.value);
-                    answers.areas[area][qid] = selected;
-                };
-            });
-
-            document.getElementById('btn-back').onclick = () => { currentStep--; renderStep(); };
-            document.getElementById('btn-next').onclick = () => {
-                // Validar que todas las preguntas estén respondidas
-                let allAnswered = true;
-                preguntas.forEach(p => {
-                    const answer = answers.areas[area][p.id];
-                    if (!answer || (Array.isArray(answer) && answer.length === 0)) {
-                        allAnswered = false;
-                    }
-                    // Validar subpregunta condicional si está visible
-                    if (p.type === 'conditional' && answer === p.subQ.trigger) {
-                        const subAnswer = answers.areas[area][p.subQ.id];
-                        if (!subAnswer) {
-                            allAnswered = false;
-                        }
-                    }
+                    };
                 });
-                if (!allAnswered) {
-                    alert('Por favor, responde todas las preguntas antes de continuar.');
-                    return;
-                }
-                currentStep++;
-                renderStep();
-            };
-        }
+                otherInput.oninput = () => { answers[stepId] = otherInput.value.trim(); };
+            }
 
-        function renderPreguntaFinal() {
-            container.innerHTML = `
-                <p class="section-label">Pregunta final — Prioridad de acción</p>
-                <h3 class="question-title">Si pudieras automatizar o mejorar una sola cosa ahora mismo, ¿cuál sería?</h3>
-                <textarea class="textarea-input" id="final-input" placeholder="Escribe aquí tu respuesta..."></textarea>
-                <div class="nav-buttons"><button class="nav-btn back" id="btn-back">← Atrás</button><button class="nav-btn next" id="btn-next">Siguiente →</button></div>
-            `;
-            document.getElementById('btn-back').onclick = () => { currentStep--; renderStep(); };
-            document.getElementById('btn-next').onclick = () => {
-                const respuesta = document.getElementById('final-input').value.trim();
-                if (!respuesta) {
-                    alert('Por favor, escribe tu respuesta antes de continuar.');
-                    return;
+            document.getElementById('btn-back').onclick = () => {
+                if (currentStep > 0) {
+                    currentStep--;
+                    renderStep();
                 }
-                answers.pregunta_final = respuesta;
+            };
+
+            document.getElementById('btn-next').onclick = () => {
+                if (config.type === 'multi-textarea') {
+                    document.querySelectorAll('.multi-input').forEach(ta => {
+                        answers[ta.dataset.qid] = ta.value.trim();
+                    });
+                } else if (config.type === 'textarea') {
+                    const sid = config.id || stepId;
+                    answers[sid] = document.getElementById('step-input').value.trim();
+                }
                 currentStep++;
                 renderStep();
             };
         }
 
         function renderContacto() {
+            updateProgress();
             container.innerHTML = `
-                <p class="section-label">Contacto</p>
+                <p class="section-label">7. Datos de contacto</p>
                 <h3 class="question-title">¡Último paso! Déjanos tus datos de contacto</h3>
                 <div class="privacy-note">Usaremos estos datos solo para enviarte el análisis y coordinar la llamada.</div>
-                <div class="contact-field"><label>Nombre completo *</label><input type="text" id="c-nombre" placeholder="Tu nombre" required></div>
-                <div class="contact-field"><label>Email *</label><input type="email" id="c-email" placeholder="email@empresa.com" required></div>
-                <div class="contact-field"><label>Teléfono *</label><input type="tel" id="c-telefono" placeholder="600 000 000" required></div>
-                <div class="nav-buttons"><button class="nav-btn back" id="btn-back">← Atrás</button><button class="submit-btn" id="btn-submit" style="flex:1;">Enviar diagnóstico</button></div>
+                <div class="contact-field">
+                    <label>Nombre completo *</label>
+                    <input type="text" id="c-nombre" placeholder="Tu nombre completo" required value="${answers.nombre || ''}">
+                </div>
+                <div class="contact-field">
+                    <label>Email corporativo *</label>
+                    <input type="email" id="c-email" placeholder="email@empresa.com" required value="${answers.email || ''}">
+                </div>
+                <div class="contact-field">
+                    <label>Teléfono *</label>
+                    <input type="tel" id="c-telefono" placeholder="600 000 000" required value="${answers.telefono || ''}">
+                </div>
+                <div class="nav-buttons">
+                    <button class="nav-btn back" id="btn-back">← Atrás</button>
+                    <button class="submit-btn" id="btn-submit" style="flex:1;">Enviar diagnóstico</button>
+                </div>
             `;
-            document.getElementById('btn-back').onclick = () => { currentStep--; renderStep(); };
+            document.getElementById('btn-back').onclick = () => {
+                currentStep--;
+                renderStep();
+            };
             document.getElementById('btn-submit').onclick = submitDiagnostic;
         }
 
-        function setupSingleSelect(key) {
-            document.querySelectorAll('.option-btn').forEach(btn => {
-                btn.onclick = () => {
-                    document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-                    btn.classList.add('selected');
-                    answers[key] = btn.dataset.value;
-                    document.getElementById('btn-next').disabled = false;
-                };
-            });
-            document.getElementById('btn-next').onclick = () => {
-                if (!answers[key]) return;
-                if (key === 'prioridad') buildQuestionFlow();
-                currentStep++;
-                renderStep();
-            };
-        }
-
         async function submitDiagnostic() {
-            const nombre = document.getElementById('c-nombre').value;
-            const email = document.getElementById('c-email').value;
-            const telefono = document.getElementById('c-telefono').value;
+            const nombre = document.getElementById('c-nombre').value.trim();
+            const email = document.getElementById('c-email').value.trim();
+            const telefono = document.getElementById('c-telefono').value.trim();
 
             if (!nombre || !email || !telefono) {
                 alert('Por favor, completa todos los campos obligatorios');
                 return;
             }
 
+            answers.nombre = nombre;
+            answers.email = email;
+            answers.telefono = telefono;
+
             const submitBtn = document.getElementById('btn-submit');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Enviando...';
 
-            const data = { ...answers, nombre, email, telefono, fecha: new Date().toISOString() };
-            console.log('Diagnostic data:', data);
+            const data = {
+                ...answers,
+                fecha: new Date().toISOString(),
+                source: 'formulario_diagnostico_vbloques'
+            };
 
             try {
                 const response = await fetch('http://localhost:5678/webhook/formulario-diagnostico', {
-                    method: 'POST', mode: 'cors',
+                    method: 'POST',
+                    mode: 'cors',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
+
                 if (response.ok) {
                     progressFill.style.width = '100%';
                     progressText.textContent = '100%';
@@ -910,11 +704,13 @@
                         <div class="success-message">
                             <h2>✓ ¡Diagnóstico enviado!</h2>
                             <p>Hemos recibido tu información correctamente.</p>
-                            <p style="margin-top: 15px;">Analizaremos tus respuestas y te contactaremos con el análisis personalizado.</p>
+                            <p style="margin-top: 15px;">Analizaremos tus respuestas por bloques y te contactaremos pronto.</p>
                             <a href="index.html" style="display: inline-block; margin-top: 30px; color: #47a2e8; text-decoration: underline;">Volver al inicio</a>
                         </div>
                     `;
-                } else throw new Error('Error');
+                } else {
+                    throw new Error('Error en el servidor');
+                }
             } catch (error) {
                 console.error('Error:', error);
                 submitBtn.disabled = false;
@@ -924,10 +720,7 @@
         }
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            questionFlow = ['sector', 'prioridad'];
-            setTimeout(() => { renderStep(); }, 800);
-        });
+        document.addEventListener('DOMContentLoaded', () => { renderStep(); });
     </script>
     <script>
         window.CHATBOT_ENDPOINT = "http://localhost:5678/webhook/3381e020-7a56-4240-a876-1a837682a5eb";
